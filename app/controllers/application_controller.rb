@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
     }
   end
 
+  def newroute
+    respond_to do |format|
+      format.html { render html: "html route"}
+      format.json { render json: { message: "json route" } }
+    end
+  end
+
+
 end
