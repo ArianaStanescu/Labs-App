@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
 
   def extra
     render json:{
-      "message": "hellow world",
+      "message": "hello world",
       "error": "goodbye"
     }
   end
