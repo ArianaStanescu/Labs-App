@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root 'application#hello'
+  # root 'application#hello'
+  root 'home#new'
 
   get 'goodbye', to: 'application#goodbye'
   get 'extra', to: 'application#extra'
