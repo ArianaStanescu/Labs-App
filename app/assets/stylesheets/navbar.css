@@ -1,5 +1,5 @@
 ul {
-    list-style-type: none;
+    /*list-style-type: none;*/
     margin: 0;
     padding: 0;
 
@@ -19,6 +19,18 @@ li {
 }
 
 .nav-link:hover {
+    color: #82adff;
+}
+
+.dropdown-toggle{
+    font-family: Verdana;
+    text-align: center;
+    color:black;
+    text-align: center;
+    line-height: 50px;
+}
+
+.dropdown-toggle:hover{
     color: #82adff;
 }
 

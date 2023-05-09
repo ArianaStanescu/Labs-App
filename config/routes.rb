@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users2/index'
   devise_for :users
 
   # root 'application#hello'
@@ -12,4 +13,5 @@ Rails.application.routes.draw do
   get 'home', to:'home#new'
   get "sign_up", to: 'users#new'
   get "log_out", to: 'extra#new'
+  get 'users', to: 'users2#index', as: "users"
 end
