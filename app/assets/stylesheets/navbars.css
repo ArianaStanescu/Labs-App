@@ -1,0 +1,36 @@
+ul {
+    /*list-style-type: none;*/
+    margin: 0;
+    padding: 0;
+
+}
+
+li {
+    display: inline;
+    margin-right: 10px;
+    font-family: Verdana;
+    text-align: center;
+    line-height: 50px;
+
+}
+
+.nav-link {
+    color: black;
+}
+
+.nav-link:hover {
+    color: #82adff;
+}
+
+.dropdown-toggle{
+    font-family: Verdana;
+    text-align: center;
+    color:black;
+    text-align: center;
+    line-height: 50px;
+}
+
+.dropdown-toggle:hover{
+    color: #82adff;
+}
+

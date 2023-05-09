@@ -1,36 +1,72 @@
-<div class="col-md-3">
-<h2>Log in</h2>
+<section class="vh-100" style="font-family: Verdana">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-6 col-lg-8 col-xl-5">
+        <img src="/images/shopping.png"
+             class="img-fluid" alt="Sample image", style="width: 100%;margin:auto">
+      </div>
+      <div class="col-md-6 col-lg-4 col-xl-2 offset-xl-1">
+        <br><br>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+              <p class="lead fw-normal mb-0 me-3", style="width: 250px; margin: 0 auto;">Sign in with</p>
+              <br>
+              <button type="button" class="btn btn-primary btn-floating mx-1">
+                <i class="fab fa-facebook-f"></i>
+              </button>
+
+              <button type="button" class="btn btn-primary btn-floating mx-1">
+                <i class="fab fa-twitter"></i>
+              </button>
+
+              <button type="button" class="btn btn-primary btn-floating mx-1">
+                <i class="fab fa-google"></i>
+              </button>
+
+            </div>
+          </div>
+
+          <br>
+
+          <div class="divider d-flex align-items-center my-4">
+            <p class="text-center fw-bold mx-3 mb-0">Or</p>
+          </div>
+
+          <div class="form-outline", style="width: 250px; margin: 0 auto;">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email"%>
+          </div>
+
+          <br>
+
+          <div class="form-outline", style="width: 250px; margin: 0 auto;">
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Password" %>
+          </div>
+
+          <br>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="form-check", style="width: 250px; margin: 0 auto;">
+              <%= f.check_box :remember_me, class: "form-check-input" %>
+              <%= f.label :remember_me, class: "form-check-label" %>
+            </div>
+          <% end %>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <div class="actions">
+              <%= f.submit "Log in", class: "btn btn-primary btn-lg"%>
+            </div>
+          </div>
 
 
+        <% end %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-outline mb-4">
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email"%>
-  </div>
-
-    <br>
-  <div class="field">
-    <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
-  </div>
-
-<br>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="form-check">
-      <%= f.check_box :remember_me, class: "form-check-input" %>
-      <%= f.label :remember_me, class: "form-check-label" %>
+        <div class="text-center text-lg-start mt-4 pt-2">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in", class: "btn btn-primary btn-clock mb-4" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
-
-</div>
-<!--<div class="form-outline mb-4">-->
-<!--  <input type="email" if="form2Exemple1" class="form-control"/>-->
-<!--  <label class="form-label" for="form2Example1">Email address</label>-->
-<!--</div>-->
+  </div>
+</section>
