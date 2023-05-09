@@ -6,7 +6,7 @@
         <div class="col-md-6">
           <div class="about_taital_main">
             <br><br><br>
-            <h1 class="about_taital" style="font-family: Lucida Handwriting">About Our Jewelry Store</h1>
+            <h1 class="about_taital" style="font-family: Lucida Handwriting">About Our Precious Treasures</h1>
             <p class="about_text">Welcome to our jewelry store, where we offer a wide variety of high-quality jewelry for every occasion. From classic pieces to the latest trends, we have something for everyone.</p>
             <br>
             <p class="about_text">  Our collection includes beautiful diamond engagement rings, sparkling earrings, statement necklaces, and elegant bracelets, all made with the finest materials and craftsmanship. We also offer a selection of men's jewelry, including stylish watches and cufflinks.</p>
@@ -18,17 +18,11 @@
               <%#= button_to "Shop Now", class: "btn btn-primary"%>
               Shop Now
             </div>
-
-<!--            <button type="button", style="  background-color:  #8ab8ff;-->
-<!--              margin: 0 auto;"> cevaaaa-->
-              <%#= button_to "Shop Now" , class: "btn btn-primary btn-lg"%>
-<!--            </button>-->
-
           </div>
         </div>
         <div class="col-md-6">
           <div><img src="images/jewelry.png" style="width:120%"></div>
-          <%#= image_tag "jewelry.png", class: "custom", alt: "Your Company" %>
+          <%#= image_tag "jewelry.png", class: "custom", alt: "Your Company", style:"width=80%" %>
 
         </div>
       </div>
@@ -45,17 +39,21 @@
 <div class="image-list-home">
   <ul>
     <li  id="home-list1">
-      <img src="images/ring.jpg">
+<!--      <img src="images/ring.jpg">-->
+      <%= image_tag "ring.jpg", class: "custom", alt: "Ring" %>
 
     </li>
     <li  id="home-list1">
-      <img src="images/earrings.jpg">
+<!--      <img src="images/earrings.jpg">-->
+      <%= image_tag "earrings.jpg", class: "custom", alt: "Earrings" %>
     </li>
     <li  id="home-list1">
-      <img src="images/bracelet.jpg">
+<!--      <img src="images/bracelet.jpg">-->
+      <%= image_tag "bracelet.jpg", class: "custom", alt: "Bracelets" %>
     </li>
     <li  id="home-list1">
-      <img src="images/necklace.jpg">
+<!--      <img src="images/necklace.jpg">-->
+      <%= image_tag "necklace.jpg", class: "custom", alt: "Necklaces" %>
     </li>
   </ul>
 </div>
@@ -65,13 +63,16 @@
 <div class="image-list-home", style="background-color: #e6f2ff">
   <ul>
     <li  id="home-list2">
-      <img src="images/worldwide_delivery.png">
+<!--      <img src="images/worldwide_delivery.png">-->
+      <%= image_tag "worldwide_delivery.png", class: "custom", alt: "Worldwide Delivery" %>
     </li>
     <li  id="home-list2">
-      <img src="images/money_back.png">
+<!--      <img src="images/money_back.png">-->
+      <%= image_tag "money_back.png", class: "custom", alt: "Money Back" %>
     </li>
     <li  id="home-list2">
-      <img src="images/secure_payment.png">
+<!--      <img src="images/secure_payment.png">-->
+      <%= image_tag "secure_payment.png", class: "custom", alt: "Secure Payment" %>
     </li>
   </ul>
 </div>
@@ -88,7 +89,8 @@
       </div>
     </div>
     <div class="col-md-5">
-      <div><img src="images/gift.png" style="width:125%; height: auto"></div>
+<!--      <div><img src="images/gift.png" style="width:125%; height: auto"></div>-->
+      <%= image_tag "gift.png", class: "custom", alt: "Gift", style:"width:125%; height: auto" %>
     </div>
   </div>
 </div>
