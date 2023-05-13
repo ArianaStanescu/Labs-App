@@ -1,0 +1,20 @@
+<div class="card" style="width: 18rem;">
+  <%= image_tag "ring.jpg", class: "d-block w-100" %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @category.name %></h5>
+    <p class="card-text"><%= @category.description %></p>
+    <%= link_to 'Edit', edit_category_path(@category), class: "btn btn-primary" %>
+    <%= link_to 'Back', categories_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<!--<p style="color: green"><%#= notice %></p>-->
+
+<%#= render @category %>
+
+<!--<div>-->
+<!--  <%#= link_to "Edit this category", edit_category_path(@category) %> |-->
+  <%#= link_to "Back to categories", categories_path %>
+
+  <%#= button_to "Destroy this category", @category, method: :delete %>
+<!--</div>-->

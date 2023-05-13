@@ -1,0 +1,60 @@
+<div class="container mt-5">
+  <h2>Categories</h2>
+  <%= link_to 'New Category', new_category_path %>
+  <br>
+  <table class="table table-info table-striped">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.id %></td>
+        <td><%= category.name %></td>
+        <td><%= category.description %></td>
+        <td><%= link_to 'Show', category %> | <%= link_to 'Edit', edit_category_path(category) %> | <%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<!--<div class="container mt-5">-->
+<!--  <h2>Users</h2>-->
+<!--  <table class="table table-info table-striped">-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--      <th scope="col">ID</th>-->
+<!--      <th scope="col">Name</th>-->
+<!--      <th scope="col">Description</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+    <%# @categories.each do |category| %>
+<!--      <tr>-->
+<!--        <td><%#= category.id %></td>-->
+<!--        <td><%#= category.name %></td>-->
+<!--        <td><%#= category.description %></td>-->
+<!--      </tr>-->
+    <%# end %>
+<!--    </tbody>-->
+<!--  </table>-->
+<!--</div>-->
+
+<!--<h1>Categories</h1>-->
+
+<!--<div id="categories">-->
+  <%# @categories.each do |category| %>
+    <%#= render category %>
+<!--    <p>-->
+      <%#= link_to "Show this category", category %>
+<!--    </p>-->
+  <%# end %>
+<!--</div>-->
+
+<%#= link_to "New category", new_category_path %>

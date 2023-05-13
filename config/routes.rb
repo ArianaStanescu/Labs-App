@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :categories
+  resources :products
   get 'users2/index'
   devise_for :users
 
