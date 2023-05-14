@@ -21,8 +21,9 @@
           </ul>
         </li>
       </ul>
-      <ul class="navbar-nav navbar-right">
 
+
+      <ul class="navbar-nav navbar-right">
         <li class="nav-item">
           <% if current_user.present? == blank? %>
             <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>

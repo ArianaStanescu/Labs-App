@@ -8,7 +8,7 @@
 <!--  </div>-->
 <!--</div>-->
 
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 20rem; align-items: center; margin: 0 auto;">
   <%# if (@category.name <=> "Rings") == 0 %>
     <%#= image_tag "ring.jpg", class: "d-block w-100" %>
   <%# else %>
@@ -17,17 +17,17 @@
     <%# end %>
   <% case @category.name
      when "Rings" %>
-    <%= image_tag "ring.jpg", class: "d-block w-100" %>
+    <%= image_tag "ring.jpg", style:"width: 20rem" %>
   <% when "Earrings" %>
-    <%= image_tag "earrings.jpg", class: "d-block w-100" %>
+    <%= image_tag "earrings.jpg", style:"width: 20rem" %>
   <% when "Bracelets" %>
-    <%= image_tag "bracelet.jpg", class: "d-block w-100" %>
+    <%= image_tag "bracelet.jpg", style:"width: 20rem" %>
   <% when "Necklaces" %>
-    <%= image_tag "necklace.jpg", class: "d-block w-100" %>
+    <%= image_tag "necklace.jpg", style:"width: 20rem" %>
   <% when "Pendant" %>
-    <%= image_tag "pendant.jpg", class: "d-block w-100" %>
+    <%= image_tag "pendant.jpg", style:"width: 20rem" %>
   <% end %>
-  <div class="card-body">
+  <div class="card-body" style="text-align: center; align-items: center">
     <h5 class="card-title"><%= @category.name %></h5>
     <p class="card-text"><%= @category.description %></p>
     <%= link_to 'Edit', edit_category_path(@category), class: "btn btn-primary" %>
