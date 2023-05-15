@@ -1,12 +1,49 @@
-<div class="card" style="width: 18rem;">
-  <%= image_tag "ring.jpg", class: "d-block w-100" %>
-  <div class="card-body">
-    <h5 class="card-title"><%= @category.name %></h5>
+<!--<div class="card" style="width: 18rem;">-->
+  <%#= image_tag "ring_1.jpg", class: "d-block w-100" %>
+<!--  <div class="card-body">-->
+<!--    <h5 class="card-title"><%#= @category.name %></h5>-->
+<!--    <p class="card-text"><%#= @category.description %></p>-->
+    <%#= link_to 'Edit', edit_category_path(@category), class: "btn btn-primary" %>
+    <%#= link_to 'Back', categories_path, class: "btn btn-primary" %>
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--  <div class="image-list-home">-->
+<!--    <ul>-->
+<!--      <li id="home-list1">-->
+        <%#= image_tag "ring_1.jpg", style: "width: 20rem;", class: "custom" %>
+<!--      </li>-->
+<!--      <li id="home-list1">-->
+        <%#= image_tag "ring_2.jpg", style: "width: 20rem;" %>
+<!--      </li>-->
+<!--    </ul>-->
+<!--  </div>-->
+
+<div class="card" style="width: 20rem; align-items: center; margin: 0 auto; background-color: #e6f2ff">
+  <% case @category.name
+     when "Rings" %>
+    <%= image_tag "ring.jpg", style: "width: 20rem;", class: "custom" %>
+  <% when "Earrings" %>
+    <%= image_tag "earrings.jpg", style:"width: 20rem" %>
+  <% when "Bracelets" %>
+    <%= image_tag "bracelet.jpg", style:"width: 20rem" %>
+  <% when "Necklaces" %>
+    <%= image_tag "necklace.jpg", style:"width: 20rem" %>
+  <% when "Pendant" %>
+    <%= image_tag "pendant.jpg", style:"width: 20rem" %>
+  <% end %>
+  <div class="card-body" style="text-align: center; align-items: center">
+    <h5 class="card-title" style="font-size: large"><%= @category.name %></h5>
     <p class="card-text"><%= @category.description %></p>
     <%= link_to 'Edit', edit_category_path(@category), class: "btn btn-primary" %>
     <%= link_to 'Back', categories_path, class: "btn btn-primary" %>
   </div>
+  <br>
+
 </div>
+
+<br>
 
 <!--<p style="color: green"><%#= notice %></p>-->
 

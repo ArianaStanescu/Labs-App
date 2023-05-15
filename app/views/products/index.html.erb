@@ -1,14 +1,51 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Products</h1>
-
-<div id="products">
-  <% @products.each do |product| %>
-    <%= render product %>
-    <p>
-      <%= link_to "Show this product", product %>
-    </p>
-  <% end %>
+<div class="container mt-5" style="font-family: Verdana">
+  <h2 style="font-family: Lucida Handwriting">Products</h2>
+  <%= link_to 'New product', new_product_path %>
+  <br><br>
+  <table class="table table-info table-striped table-hover">
+    <thead>
+    <tr style="background-color: #e6f2ff">
+      <th scope="col">No</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">SKU</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Price</th>
+      <th scope="col">Category</th>
+      <th scope="col">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%# @products.each do |product| %>
+    <% @products.each.with_index(1) do |product, index| %>
+      <tr>
+        <td><%= index %></td>
+        <td><%= product.name %></td>
+        <td><%= product.description %></td>
+        <td><%= product.sku %></td>
+        <td><%= product.stock %></td>
+        <td><%= product.price %></td>
+        <td><%= product.category %></td>
+        <td><%= link_to 'Show', product %> | <%= link_to 'Edit', edit_product_path(product) %> | <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
 
-<%= link_to "New product", new_product_path %>
+
+
+<!--<p style="color: green"><%#= notice %></p>-->
+
+<!--<h1>Products</h1>-->
+
+<!--<div id="products">-->
+  <%# @products.each do |product| %>
+    <%#= render product %>
+<!--    <p>-->
+      <%#= link_to "Show this product", product %>
+<!--    </p>-->
+  <%# end %>
+<!--</div>-->
+
+<%#= link_to "New product", new_product_path %>

@@ -1,10 +1,61 @@
-<p style="color: green"><%= notice %></p>
+<div class="card" style="width: 30rem; font-family: Verdana; margin: 0 auto; background-color: #e6f2ff">
 
-<%= render @product %>
+  <% case @product.name
+     when "Sparkling Elevated Heart Ring" %>
+    <%= image_tag "ring_1.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Herbarium Cluster Open Ring" %>
+    <%= image_tag "ring_2.jpg", style:"width: 30rem" %>
+  <% when "Daisy Flower Ring" %>
+    <%= image_tag "ring_3.jpg", style:"width: 30rem" %>
+  <% when "Sparkle & Hearts Ring" %>
+    <%= image_tag "ring_4.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Twisted Lines Ring" %>
+    <%= image_tag "ring_5.jpg", style:"width: 30rem" %>
+  <% when "Classic Sparkle Halo Ring" %>
+    <%= image_tag "ring_6.jpg", style:"width: 30rem" %>
+  <% when "Wrap-Around Arrow Ring" %>
+    <%= image_tag "ring_7.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Daisy Flower Trio Stud Earrings" %>
+    <%= image_tag "earrings_1.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Infinity Heart Stud Earrings" %>
+    <%= image_tag "earrings_2.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Daisy Flower Stud Earrings" %>
+    <%= image_tag "earrings_3.jpg", style:"width: 30rem" %>
+  <% when "Sparkle & Hearts Hoop Earrings" %>
+    <%= image_tag "earrings_4.jpg", style:"width: 30rem" %>
+  <% when "Moments Sparkling Infinity Heart Clasp Snake Chain Bracelet" %>
+    <%= image_tag "bracelet_1.jpg", style:"width: 30rem" %>
+  <% when "Celestial Stars Bracelet" %>
+    <%= image_tag "bracelet_2.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Family Tree Slider Bracelet" %>
+    <%= image_tag "bracelet_3.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Infinity Heart Collier Necklace" %>
+    <%= image_tag "necklace_1.jpg", style:"width: 30rem" %>
+  <% when "Sparkling Infinity Collier Necklace" %>
+    <%= image_tag "necklace_2.jpg", style:"width: 30rem" %>
+  <% end %>
 
-<div>
-  <%= link_to "Edit this product", edit_product_path(@product) %> |
-  <%= link_to "Back to products", products_path %>
 
-  <%= button_to "Destroy this product", @product, method: :delete %>
+  <div class="card-body" style="text-align: center; align-items: center">
+    <h5 class="card-title" style="font-size: large"><%= @product.name %></h5>
+    <p class="card-text"><%= @product.description %></p>
+    <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
+    <%= link_to 'Back', products_path, class: "btn btn-primary" %>
+    <br>
+  </div>
+  <br>
 </div>
+<br>
+
+
+
+<!--<p style="color: green"><%#= notice %></p>-->
+
+<%#= render @product %>
+
+<!--<div>-->
+<!--  <%#= link_to "Edit this product", edit_product_path(@product) %> |-->
+  <%#= link_to "Back to products", products_path %>
+
+  <%#= button_to "Destroy this product", @product, method: :delete %>
+<!--</div>-->
