@@ -1,4 +1,4 @@
-<div class="card" style="width: 30rem; font-family: Verdana; margin: 0 auto;">
+<div class="card" style="width: 30rem; font-family: Verdana; margin: 0 auto; background-color: #e6f2ff">
 
   <% case @product.name
      when "Sparkling Elevated Heart Ring" %>
@@ -37,13 +37,17 @@
 
 
   <div class="card-body" style="text-align: center; align-items: center">
-    <h5 class="card-title"><%= @product.name %></h5>
+    <h5 class="card-title" style="font-size: large"><%= @product.name %></h5>
     <p class="card-text"><%= @product.description %></p>
     <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
     <%= link_to 'Back', products_path, class: "btn btn-primary" %>
+    <br>
   </div>
+  <br>
 </div>
 <br>
+
+
 
 <!--<p style="color: green"><%#= notice %></p>-->
 
