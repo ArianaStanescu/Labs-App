@@ -21,6 +21,14 @@
     </div>
     <br>
     <div class="field", style="width: 350px; margin: 0 auto;">
+      <%= f.text_field :metal, required: true, class: "form-control", placeholder: "Metal"%>
+    </div>
+    <br>
+    <div class="field", style="width: 350px; margin: 0 auto;">
+      <%= f.text_field :size, required: true, class: "form-control", placeholder: "Size"%>
+    </div>
+    <br>
+    <div class="field", style="width: 350px; margin: 0 auto;">
       <%= f.number_field :price, min: 0, step: 0.01, required: true, class: "form-control", placeholder: "Price"%>
     </div>
     <br>
