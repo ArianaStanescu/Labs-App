@@ -1,8 +1,11 @@
 <div class="container mt-5" style="font-family: Verdana">
   <h2 style="font-family: Lucida Handwriting">Products</h2>
-  <%= link_to 'New product', new_product_path %>
+  <%= link_to 'New product', new_product_path, style:"font-size: large" %>
   <br><br>
-  <table class="table table-info table-striped table-hover">
+  <% product_count = @products.count %>
+  <p style="font-family: Verdana; "> <%= product_count %> Products</p>
+
+  <table class="table table-info table-striped table-hover table-sm">
     <thead>
     <tr style="background-color: #e6f2ff">
       <th scope="col">No</th>
@@ -10,9 +13,12 @@
       <th scope="col">Description</th>
       <th scope="col">SKU</th>
       <th scope="col">Stock</th>
+      <th scope="col">Metal</th>
+      <th scope="col">Size</th>
       <th scope="col">Price</th>
       <th scope="col">Category</th>
       <th scope="col">Action</th>
+
     </tr>
     </thead>
     <tbody>
@@ -24,6 +30,8 @@
         <td><%= product.description %></td>
         <td><%= product.sku %></td>
         <td><%= product.stock %></td>
+        <td><%= product.metal %></td>
+        <td><%= product.size %></td>
         <td><%= product.price %></td>
         <td><%= product.category_id %></td>
         <td><%= link_to 'Show', product %> | <%= link_to 'Edit', edit_product_path(product) %> | <%= link_to 'Destroy', product, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
@@ -32,6 +40,9 @@
     </tbody>
   </table>
 </div>
+
+
+
 
 
 
