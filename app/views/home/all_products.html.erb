@@ -1,9 +1,16 @@
 <div class="container mt-5" style="font-family: Verdana">
 <h1>Products</h1>
-<br><br>
+<br>
 <% product_count = @products.count %>
 <p style="font-family: Verdana; "> <%= product_count %> Products</p>
+  <%= form_tag(all_products_path, method: 'get') do %>
+    <label for="sort_order">Sort: </label>
+    <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), include_blank: true) %>
+    <%#= submit_tag('Sort') %>
+    <%= submit_tag('Sort', class: "btn btn-primary") %>
+<% end %>
 
+  <br>
 
 
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
