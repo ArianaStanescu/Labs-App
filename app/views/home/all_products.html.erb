@@ -1,21 +1,13 @@
 <div class="container mt-5" style="font-family: Verdana">
-<h1>All Products</h1>
+<h1 style="font-family: Lucida Handwriting; text-align: center">All Products</h1>
 <br>
 <% product_count = @products.count %>
 <p style="font-family: Verdana; "> <%= product_count %> Products</p>
-  <%#= form_tag(all_products_path, method: 'get', class: "form-inline") do %>
-<!--    <div class="form-group">-->
-<!--      <label for="sort_order" class="mr-2">Sort:</label>-->
-      <%#= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), class: "form-control mr-2", style: "width: 200px") %>
-      <%#= submit_tag('Sort', class: "btn btn-primary") %>
-<!--    </div>-->
-  <%# end %>
   <%= form_tag(all_products_path, method: 'get', id: "sort-form", class: "form-inline") do %>
     <div class="form-group mr-2">
       <label for="sort_order" class="mr-2">Sort: </label>
-      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), class: "form-control", style: "width: 200px", id: "sort-select") %>
+      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),  class: "form-control", style: "width: 180px", id: "sort-select") %>
     </div>
-    <!-- Nu mai avem submit_tag -->
   <% end %>
 
 
@@ -37,12 +29,9 @@
             <p class="card-text">Metal: <%= product.metal %> </p>
             <p class="card-text"> Size: <%= product.size %> </p>
             <p class="card-text">Price: <%= product.price %>$</p>
-<!--            <div class="mt-auto">-->
-              <%#= link_to 'View Details', product, class: "btn btn-primary" %>
-<!--            </div>-->
-<!--            <div class="mt-auto">-->
-              <%#= link_to 'Add To Cart', product, class: "btn btn-primary" %>
-<!--            </div>-->
+            <div class="mt-auto">
+              <%= link_to 'Add To Cart', product, class: "btn btn-primary" %>
+            </div>
           </div>
           <br>
         </div>
@@ -54,6 +43,7 @@
 </div>
 </div>
 
+<br>
 <script>
     // Obținem referința către selectul de sortare și adăugăm un eveniment pentru schimbarea valorii
     const sortSelect = document.getElementById('sort-select');
