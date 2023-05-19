@@ -35,7 +35,25 @@ a.text-success:hover {
   display: flex;
   justify-content: center;
 }
+.dropdown:hover>.dropdown-menu {
+  display: block;
+  //background-color: #e6f2ff;
+}
 
+//.dropdown>.dropdown-toggle:active {
+//  /*Without this, clicking will make it sticky*/
+//  pointer-events: none;
+//  background-color: #e6f2ff;
+//}
+
+
+ul.dropdown-menu li:hover {
+  background-color: #e6f2ff;
+}
+
+#dropdown_li li{
+  background-color: #e6f2ff;
+}
 
 
 

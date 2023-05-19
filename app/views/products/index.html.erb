@@ -1,5 +1,5 @@
 <div class="container mt-5" style="font-family: Verdana">
-  <h2 style="font-family: Lucida Handwriting">Products</h2>
+  <h2 style="font-family: Lucida Handwriting; text-align: center">Products</h2>
   <%= link_to 'New product', new_product_path, style:"font-size: large" %>
   <br><br>
   <% product_count = @products.count %>
@@ -37,8 +37,13 @@
         <td><%= link_to 'Show', product %> | <%= link_to 'Edit', edit_product_path(product) %> | <%= link_to 'Destroy', product, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+
     </tbody>
   </table>
+  <div class="text-right">
+    <%= will_paginate @products, previous_label: '← Previous', next_label: 'Next →', class: 'pagination justify-content-end' %>
+
+  </div>
 </div>
 
 
