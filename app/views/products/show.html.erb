@@ -1,33 +1,73 @@
-<div class="card" style="width: 30rem; font-family: Verdana; margin: 0 auto; background-color: #e6f2ff">
+<section class="vh-100" style="font-family: Verdana">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100" style="background-color: #e6f2ff;
+      margin-left: 100px; margin-right: 100px">
+      <div class="col-md-6 col-lg-6 col-xl-5">
+        <%= image_tag @product.product_image + ".jpg" %>
+      </div>
+      <div class="col-md-4 col-lg-4 col-xl-2 offset-xl-1" >
+        <br><br>
+        <div class="text-center text-lg-start mt-4 pt-2 float-right" >
+          <br>
+          <h5 class="card-title" style="font-size: large; font-family: Lucida Handwriting;"><%= @product.name %></h5>
+          <br>
+          <p class="card-text"><%= @product.description %></p>
+          <p class="card-text">Metal: <%= @product.metal %> </p>
+          <p class="card-text"> Size: <%= @product.size %> </p>
+          <p class="card-text">Price: <%= @product.price %> | Stock: <%= @product.stock %></p>
+          <br>
+          <% if current_user.present? %>
+          <%= link_to 'Back', products_path, class: "btn btn-primary" %>
+          <%end %>
+          <% if current_user.present? %>
+          <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
+          <%end %>
 
-  <%= image_tag @product.product_image + ".jpg", style:"width: 30rem" %>
-
-  <div class="card-body" style="text-align: center; align-items: center">
-    <h5 class="card-title" style="font-size: large"><%= @product.name %></h5>
-    <p class="card-text"><%= @product.description %></p>
-    <p class="card-text">Metal: <%= @product.metal %> </p>
-    <p class="card-text"> Size: <%= @product.size %> </p>
-    <p class="card-text">Price: <%= @product.price %> | Stock: <%= @product.stock %></p>
-
-    <% if current_user.present? %>
-      <%= link_to 'Back', products_path, class: "btn btn-primary" %>
-    <%end %>
-    <% if current_user.present? %>
-      <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
-    <%end %>
-
-    <% if current_user.present? == blank? %>
-      <%= link_to 'Back', all_products_path, class: "btn btn-primary" %>
-    <%end %>
-    <% if current_user.present? == blank? %>
-      <%= link_to 'Add To Cart', all_products_path, class: "btn btn-primary" %>
-    <%end %>
-    <%#= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
-    <br>
+          <% if current_user.present? == blank? %>
+          <%= link_to 'Back', all_products_path, class: "btn btn-primary" %>
+          <%end %>
+          <% if current_user.present? == blank? %>
+          <%= link_to 'Add To Cart', all_products_path, class: "btn btn-primary" %>
+          <%end %>
+          <br><br>
+        </div>
+      </div>
+    </div>
   </div>
-  <br>
-</div>
+</section>
 <br>
+
+
+<!--<div class="card" style="width: 30rem; font-family: Verdana; margin: 0 auto; background-color: #e6f2ff">-->
+
+  <%#= image_tag @product.product_image + ".jpg", style:"width: 30rem" %>
+
+<!--  <div class="card-body" style="text-align: center; align-items: center">-->
+<!--    <h5 class="card-title" style="font-size: large"><%#= @product.name %></h5>-->
+<!--    <p class="card-text"><%#= @product.description %></p>-->
+<!--    <p class="card-text">Metal: <%#= @product.metal %> </p>-->
+<!--    <p class="card-text"> Size: <%#= @product.size %> </p>-->
+<!--    <p class="card-text">Price: <%#= @product.price %> | Stock: <%#= @product.stock %></p>-->
+
+    <%# if current_user.present? %>
+      <%#= link_to 'Back', products_path, class: "btn btn-primary" %>
+    <%#end %>
+    <%# if current_user.present? %>
+      <%#= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
+    <%#end %>
+
+    <%# if current_user.present? == blank? %>
+      <%#= link_to 'Back', all_products_path, class: "btn btn-primary" %>
+    <%#end %>
+    <%# if current_user.present? == blank? %>
+      <%#= link_to 'Add To Cart', all_products_path, class: "btn btn-primary" %>
+    <%#end %>
+    <%#= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
+<!--    <br>-->
+<!--  </div>-->
+<!--  <br>-->
+<!--</div>-->
+<!--<br>-->
 
 
 
