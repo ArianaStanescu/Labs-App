@@ -21,10 +21,11 @@
 <!--  </div>-->
 
 <div class="container">
+
+  <%# @categories.each do |category| %>
+  <h2 style="font-family: Lucida Handwriting; text-align: center"><%= @category.name %></h2>
   <% category_product_count = @products.count { |product| product.category_id == @category.id } %>
   <p style="font-family: Verdana; text-align: right;"> <%= category_product_count %> Results</p>
-  <%# @categories.each do |category| %>
-
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
       <% if (@category.id == product.category_id) %>
@@ -39,7 +40,7 @@
             <div class="mt-auto">
               <%#= link_to 'Edit', edit_category_path(@category), class: "btn btn-primary", style:"align: bottom" %>
               <%= link_to 'Edit', edit_product_path(product), class: "btn btn-primary" %>
-              <%= link_to 'Back', categories_path, class: "btn btn-primary" %>
+              <%#= link_to 'Back', categories_path, class: "btn btn-primary" %>
             </div>
           </div>
           <br>
@@ -50,7 +51,12 @@
   <%# end %>
 
   </div>
+  <br>
+  <div class="text-right">
+    <%= link_to 'Back', categories_path, class: "btn btn-primary" %>
+  </div>
 </div>
+
 <br>
 
 

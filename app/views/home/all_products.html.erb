@@ -1,19 +1,23 @@
 <div class="container mt-5" style="font-family: Verdana">
-<h1 style="font-family: Lucida Handwriting; text-align: center">All Products</h1>
+  <div class="image-container">
+    <h1 class="image-text" style="font-family: Lucida Handwriting">All Products</h1>
+  </div>
+
 <br>
+
 <% product_count = @products.count %>
 <p style="font-family: Verdana; "> <%= product_count %> Products</p>
   <%= form_tag(all_products_path, method: 'get', id: "sort-form", class: "form-inline") do %>
     <div class="form-group mr-2">
       <label for="sort_order" class="mr-2">Sort: </label>
-      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),  class: "form-control", style: "width: 180px", id: "sort-select") %>
+      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), class: "form-control", style: "width: 180px", id: "sort-select") %>
     </div>
+
   <% end %>
-
-
-
+  <div class="ml-auto", style="text-align: right">
+    <%= link_to "Size Guide", "#bottom-section", class: "text-right scroll-link" %>
+  </div>
   <br>
-
 
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
@@ -30,7 +34,8 @@
             <p class="card-text"> Size: <%= product.size %> </p>
             <p class="card-text">Price: <%= product.price %>$</p>
             <div class="mt-auto">
-              <%= link_to 'Add To Cart', product, class: "btn btn-primary" %>
+              <%#= link_to 'Add To Cart', product, class: "btn btn-primary" %>
+              <%= link_to 'Add To Cart', all_products_path, class: "btn btn-primary" %>
             </div>
           </div>
           <br>
@@ -41,9 +46,29 @@
   </div>
 
 </div>
+  <div id="bottom-section" style="display: flex; justify-content: center; align-items: center;">
+    <%= image_tag "rings_size_guide1.png", style: "width: 35rem" %>
+    <%= image_tag "rings_size_guide2.png", style: "width: 35rem" %>
+    <%#= image_tag "bracelet_size_guide.png", style: "width: 35rem" %>
+  </div>
 </div>
 
 <br>
+
+<%= javascript_tag do %>
+  $(document).on('turbolinks:load', function() {
+  $('a.scroll-link').click(function(event) {
+  event.preventDefault();
+
+  var target = $(this).attr('href');
+  var offset = $(target).offset().top;
+
+  $('html, body').animate({ scrollTop: offset }, 800);
+  });
+  });
+<% end %>
+
+
 <script>
     // Obținem referința către selectul de sortare și adăugăm un eveniment pentru schimbarea valorii
     const sortSelect = document.getElementById('sort-select');

@@ -14,3 +14,20 @@
   width:20rem;
   //background-color: lightpink;
 }
+
+.image-container {
+  background-image:image_url("all_products.png");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+.image-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
