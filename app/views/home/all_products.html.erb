@@ -10,7 +10,8 @@
   <%= form_tag(all_products_path, method: 'get', id: "sort-form", class: "form-inline") do %>
     <div class="form-group mr-2">
       <label for="sort_order" class="mr-2">Sort: </label>
-      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), class: "form-control", style: "width: 180px", id: "sort-select") %>
+      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),
+                     class: "form-control", style: "width: 180px", id: "sort-select") %>
     </div>
 
   <% end %>
