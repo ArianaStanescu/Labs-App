@@ -21,5 +21,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  private
+    def check_admin
+      if(current_user.role !='admin')
+        redirect_to root_path
+        return
+      end
+    end
 
 end
