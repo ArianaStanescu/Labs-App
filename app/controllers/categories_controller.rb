@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
-
+  # before_action :set_product, only: %i[ show edit update destroy ]
   # GET /categories or /categories.json
   def index
     @categories = Category.all
@@ -9,7 +9,10 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1 or /categories/1.json
   def show
-    @products = @category.products
+    # @products = @category.products initial asa era si mergea
+
+    @products = Product.all
+    @categories = Category.all
   end
 
   # GET /categories/new
