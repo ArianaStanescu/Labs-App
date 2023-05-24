@@ -21,15 +21,34 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Password confirmation" %>
     </div>
 
+
     <br>
 
-<!--    <div class="form-check", style="width: 250px; margin: 0 auto;">-->
-      <%#= f.check_box :terms_and_conditions, class: "form-check-input" %>
-      <%#= f.label :terms_and_conditions, class: "form-check-label" do %>
-<!--        I agree all statements in <a href="#">Terms of service</a>.-->
-      <%# end %>
-<!--    </div>-->
+    <%= fields_for :credit_cards, @user.credit_cards.build do |cc_form| %>
+      <div class="field", style="width: 250px; margin: 0 auto;">
+        <%= cc_form.text_field :number, class: "form-control", placeholder: "Card Number" %>
+      </div>
+      <br>
+      <div class="field", style="width: 250px; margin: 0 auto;">
+        <%= cc_form.date_field :expiry_date, class: "form-control", placeholder: "Expiry date" %>
+      </div>
+    <% end %>
 
+    <%#= f.fields_for :credit_cards do |cc_form| %>
+<!--      <div class="field">-->
+        <%#= cc_form.label :number %>
+        <%#= cc_form.text_field :number, class: "form-control" %>
+<!--      </div>-->
+<!--      <div class="field">-->
+        <%#= cc_form.label :expiry_date %>
+        <%#= cc_form.text_field :expiry_date, class: "form-control" %>
+<!--      </div>-->
+    <%# end %>
+
+    <%#= render "credit_cards/new" %>
+
+
+    <br>
 
 
     <div class="actions">

@@ -1,0 +1,33 @@
+<%#= form_with(model: credit_card) do |form| %>
+  <%# if credit_card.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(credit_card.errors.count, "error") %> prohibited this credit_card from being saved:</h2>-->
+
+<!--      <ul>-->
+        <%# credit_card.errors.each do |error| %>
+<!--          <li><%#= error.full_message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
+
+<!--  <div>-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>
+
+<%= form_for(@credit_card) do |f| %>
+  <div class="text-center text-lg-start mt-4 pt-2" style="font-family: Verdana">
+    <br>
+    <div class="field", style="width: 350px; margin: 0 auto;">
+      <%= f.text_field :number, autofocus: true, required: true, class: "form-control", placeholder: "number"%>
+    </div>
+    <br>
+    <div class="field", style="width: 350px; margin: 0 auto;">
+      <%= f.date_field :expiry_date, autofocus: true, required: true, class: "form-control", placeholder: "expiry_date", style:"height: 150px" %>
+    </div>
+    <br>
+
+
+<% end %>
+</div>
