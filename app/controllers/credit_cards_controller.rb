@@ -1,9 +1,11 @@
 class CreditCardsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_credit_card, only: %i[ show edit update destroy ]
 
   # GET /credit_cards or /credit_cards.json
   def index
-    @credit_cards = CreditCard.all
+    @user = current_user
+    @credit_cards = @user.credit_cards
   end
 
   # GET /credit_cards/1 or /credit_cards/1.json
@@ -69,6 +71,6 @@ class CreditCardsController < ApplicationController
     # end
 
   def credit_card_params
-    params.require(:credit_card).permit(:number, :expiry_date)
+    params.require(:credit_card).permit(:id, :number, :expiry_date, :user_id)
   end
 end

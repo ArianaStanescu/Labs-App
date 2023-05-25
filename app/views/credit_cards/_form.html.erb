@@ -24,10 +24,12 @@
     </div>
     <br>
     <div class="field", style="width: 350px; margin: 0 auto;">
-      <%= f.date_field :expiry_date, autofocus: true, required: true, class: "form-control", placeholder: "expiry_date", style:"height: 150px" %>
+      <%= f.date_field :expiry_date, autofocus: true, required: true, class: "form-control", placeholder: "expiry_date" %>
     </div>
     <br>
-
-
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <div class="actions">
+      <%= f.submit button_text, class: "btn btn-primary btn-lg" %>
+    </div>
+  </div>
 <% end %>
-</div>

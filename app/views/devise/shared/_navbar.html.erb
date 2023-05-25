@@ -68,6 +68,13 @@
             <%= link_to "Categories", categories_path, class: "nav-link" %>
           <%end %>
         </li>
+
+        <li class="nav-item">
+          <% if current_user.present? %>
+            <%= link_to "My Account", my_account_path, class: "nav-link" %>
+          <%end %>
+        </li>
+
         <li class="nav-item">
           <% if current_user.present? %>
             <%= button_to "Log Out", destroy_user_session_path, method: :delete, class: "nav-link", style:"background-color: #e6f2ff; border:none"%>

@@ -24,31 +24,28 @@
 
     <br>
 
-    <%= fields_for :credit_cards, @user.credit_cards.build do |cc_form| %>
-      <div class="field", style="width: 250px; margin: 0 auto;">
-        <%= cc_form.text_field :number, class: "form-control", placeholder: "Card Number" %>
-      </div>
-      <br>
-      <div class="field", style="width: 250px; margin: 0 auto;">
-        <%= cc_form.date_field :expiry_date, class: "form-control", placeholder: "Expiry date" %>
-      </div>
-    <% end %>
-
-    <%#= f.fields_for :credit_cards do |cc_form| %>
-<!--      <div class="field">-->
-        <%#= cc_form.label :number %>
-        <%#= cc_form.text_field :number, class: "form-control" %>
+    <%#= fields_for :credit_cards, @user.credit_cards.build do |cc_form| %>
+<!--      <div class="field", style="width: 250px; margin: 0 auto;">-->
+        <%#= cc_form.text_field :number, class: "form-control", placeholder: "Card Number" %>
 <!--      </div>-->
-<!--      <div class="field">-->
-        <%#= cc_form.label :expiry_date %>
-        <%#= cc_form.text_field :expiry_date, class: "form-control" %>
+<!--      <br>-->
+<!--      <div class="field", style="width: 250px; margin: 0 auto;">-->
+        <%#= cc_form.date_field :expiry_date, class: "form-control", placeholder: "Expiry date" %>
 <!--      </div>-->
     <%# end %>
 
-    <%#= render "credit_cards/new" %>
+
+<!--    <div id="credit-cards">-->
+      <%#= f.fields_for :credit_cards, @user.credit_cards.build do |cc_form| %>
+        <%#= render "credit_card_fields", f: cc_form %>
+      <%# end %>
+<!--    </div>-->
+
+    <%#= link_to "Add Credit Card",  :credit_cards, partial: "_credit_card_fields" %>
 
 
-    <br>
+
+
 
 
     <div class="actions">

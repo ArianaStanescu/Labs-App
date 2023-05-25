@@ -1,4 +1,5 @@
 class HomeController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :all_products]
   # def new
   # end
 
@@ -14,6 +15,10 @@ class HomeController < ApplicationController
     # @products = Product.all
     # @sort_order = params[:sort_order] || 'asc'
     # @products = Product.order(price: @sort_order)
+  end
+
+  def my_account
+    @user = current_user
   end
 
 end

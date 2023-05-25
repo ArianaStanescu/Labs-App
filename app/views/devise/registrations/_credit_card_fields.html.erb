@@ -1,0 +1,12 @@
+<fieldset>
+  <%#= f.hidden_field :_destroy %>
+  <div class="field" style="width: 250px; margin: 0 auto;">
+    <%= f.text_field :number, class: "form-control", placeholder: "Card Number" %>
+  </div>
+  <br>
+  <div class="field" style="width: 250px; margin: 0 auto;">
+    <%= f.date_field :expiry_date, class: "form-control", placeholder: "Expiry date" %>
+  </div>
+  <%#= link_to "Remove", "#", class: "remove_fields" %>
+  <br>
+</fieldset>
