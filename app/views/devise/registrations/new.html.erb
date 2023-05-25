@@ -5,8 +5,17 @@
   <div class="text-center text-lg-start mt-4 pt-2">
     <br>
     <br>
-    <h2>Sign up</h2>
+    <h2 style="font-family: Lucida Handwriting; text-align: center">Sign up</h2>
     <div class="field", style="width: 250px; margin: 0 auto;">
+      <div class="field", style="width: 250px; margin: 0 auto;">
+        <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name" %>
+      </div>
+      <br>
+      <div class="field", style="width: 250px; margin: 0 auto;">
+        <%= f.text_field :phone, required: true, class: "form-control", placeholder: "Phone" %>
+      </div>
+      <br>
+      <div class="field", style="width: 250px; margin: 0 auto;">
       <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control", placeholder: "Email" %>
     </div>
 
@@ -20,6 +29,9 @@
     <div class="field", style="width: 250px; margin: 0 auto;">
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "Password confirmation" %>
     </div>
+
+    <br>
+
 
 
     <br>
@@ -57,3 +69,5 @@
 <%= render "devise/shared/links" %>
 </div>
 </div>
+</div>
+<br>

@@ -3,8 +3,8 @@
       <br>
       <br>
     <h1 style="font-family: Lucida Handwriting; text-align: center">My account</h1>
-    <p>Name:</p>
-    <p>Phone:</p>
+    <p>Name: <%= @user.name %></p>
+    <p>Phone: <%= @user.phone %></p>
     <p>Email: <%= @user.email %></p>
     <%= link_to 'Add New Card', new_credit_card_path, class: "btn btn-primary" %>
     <%= link_to 'View My Cards', user_credit_cards_path(current_user), class: "btn btn-primary" %>

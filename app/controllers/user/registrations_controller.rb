@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class User::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_account_update_params, only: [:update]
 
   # def new eu
   #   super
@@ -65,64 +65,22 @@ class User::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  # def create eu
-  #   super do |resource|
-  #     resource.credit_cards.build(sign_up_params[:credit_cards_attributes])
-  #     resource.save
-  #   end
-  # end
-
-  # def sign_up_params eu
-  #   params.require(:user).permit(:email, :password, :password_confirmation, credit_cards_attributes: [:number, :expiry_date])
-  # end
-  # def create
-  #   super do |resource|
-  #     # Salvează cardurile atașate userului înregistrat
-  #     params[:user][:credit_cards_attributes].each do |_, cc_params|
-  #       resource.credit_cards.create(cc_params)
-  #     end
-  #   end
-  # end
-  #
-  # private
-  #
-  # def sign_up_params eu
-  #   params.require(:user).permit(:email, :password, :password_confirmation, credit_cards_attributes: [:number, :expiry_date])
-  # end
-  #
-  # def build_resource(hash = {}) eu
-  #   self.resource = resource_class.new_with_session(hash, session)
-  #   self.resource.credit_cards.build # Această linie adaugă un nou obiect CreditCard asociat utilizatorului
-  #   self.resource
-  # end
-  #
-  # def new eu
-  #   build_resource({})
-  #   resource.credit_cards.build
-  #   respond_with self.resource
-  # end
-  #
-  # def create eu
-  #   super do |resource|
-  #     if resource.valid?
-  #       credit_card_params = params.require(:user).permit(credit_cards_attributes: [:number, :expiry_date])
-  #       resource.credit_cards.create(credit_card_params[:credit_cards_attributes]['0'])
-  #     end
-  #   end
-  # end
 
 
-  def new
-    build_resource
-    resource.credit_cards.build
-    respond_with resource
+
+
+  protected
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :phone])
   end
 
-  private
-
-  def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, credit_cards_attributes: [:number, :expiry_date])
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :phone])
   end
+
+  # def sign_up_params
+  #   params.require(:user).permit(:name, :phone, :email, :password, :password_confirmation, credit_cards_attributes: [:number, :expiry_date])
+  # end
 
 
 
