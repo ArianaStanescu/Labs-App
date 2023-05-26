@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :products
 
   get 'users/index'
-  devise_for :users
+  # devise_for :users
+
+  devise_for :users, controllers: { registrations: 'user/registrations' }
 
   # root 'application#hello'
   # root 'home#new'

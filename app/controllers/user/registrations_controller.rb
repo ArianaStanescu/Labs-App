@@ -4,11 +4,6 @@ class User::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
-  # def new eu
-  #   super
-  #   resource.credit_cards.build
-  # end
-
   # GET /resource/sign_up
   # def new
   #   super
@@ -81,6 +76,11 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def sign_up_params
   #   params.require(:user).permit(:name, :phone, :email, :password, :password_confirmation, credit_cards_attributes: [:number, :expiry_date])
   # end
+
+  def sign_up_params
+    params.require(:user).permit(:name, :phone, :email, :password, :password_confirmation)
+  end
+
 
 
 
