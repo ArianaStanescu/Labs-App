@@ -19,6 +19,7 @@ class HomeController < ApplicationController
 
   def my_account
     @user = current_user
+    @credit_cards = current_user.credit_cards
   end
 
 end

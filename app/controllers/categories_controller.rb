@@ -9,10 +9,15 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1 or /categories/1.json
   def show
-    # @products = @category.products initial asa era si mergea
+    # initial asa era si mergea
+    # @products = @category.products
 
-    @products = Product.all
-    @categories = Category.all
+
+    # @products = Product.all
+    # @categories = Category.all
+
+    @category = Category.find(params[:id])
+    @products = @category.products
   end
 
   # GET /categories/new
@@ -22,6 +27,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    @category = Category.find(params[:id])
   end
 
   # POST /categories or /categories.json
