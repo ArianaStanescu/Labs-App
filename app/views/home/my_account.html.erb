@@ -13,12 +13,12 @@
       </div>
     </div>
 
-    <%# @credit_cards.each do |card| %>
-<!--      <p>Credit Card Number: <%#= card.number %></p>-->
-<!--      <p>Expiry Date: <%#= card.expiry_date %></p>-->
-<!--      <br>-->
+    <% @credit_cards.each do |card| %>
+      <p>Credit Card Number: <%= card.number %></p>
+      <p>Expiry Date: <%= card.expiry_date %></p>
+      <br>
       <%#= render partial: "credit_cards/show", collection: @credit_cards %>
-    <%# end %>
+    <% end %>
 
     <%= link_to 'Add New Card', new_credit_card_path, class: "btn btn-primary" %>
     <%= link_to 'View My Cards', user_credit_cards_path(current_user), class: "btn btn-primary" %>

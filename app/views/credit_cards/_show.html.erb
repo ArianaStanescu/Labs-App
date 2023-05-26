@@ -8,47 +8,92 @@
 
 <%#= button_to "Destroy this credit card", @credit_card, method: :delete %>
 <!--</div>-->
-<div class="padding">
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-header">
-          <strong>Credit Card</strong>
-          <small>your card details</small>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="ccnumber">Credit Card Number</label>
-                <div class="input-group">
-                  <%= @credit_card.number%>
-                  <div class="input-group-append">
+<!--<div class="padding">-->
+<!--  <div class="row">-->
+<!--    <div class="col-sm-6">-->
+<!--      <div class="card">-->
+<!--        <div class="card-header">-->
+<!--          <strong>Credit Card</strong>-->
+<!--          <small>your card details</small>-->
+<!--        </div>-->
+<!--        <div class="card-body">-->
+<!--          <div class="row">-->
+<!--            <div class="col-sm-12">-->
+<!--              <div class="form-group">-->
+<!--                <label for="ccnumber">Credit Card Number</label>-->
+<!--                <div class="input-group">-->
+                  <%#= @credit_card.number%>
+<!--                  <div class="input-group-append">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="row">-->
+<!--            <div class="col-sm-12">-->
+<!--              <div class="form-group">-->
+<!--                <label for="ccnumber">Expiry Date</label>-->
+<!--                <div class="input-group">-->
+                  <%#= @credit_card.expiry_date%>
+<!--                  <div class="input-group-append">-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="card-footer">-->
+            <%#= link_to "Edit Credit Card", edit_credit_card_path(@credit_card), class: "btn btn-primary btn-lg" %>
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<% @credit_cards.each do |credit_card| %>
+  <div class="padding">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-header">
+            <strong>Credit Card</strong>
+            <small>your card details</small>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Credit Card Number</label>
+                  <div class="input-group">
+                    <%= credit_card.number %>
+                    <div class="input-group-append">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="form-group">
-                <label for="ccnumber">Expiry Date</label>
-                <div class="input-group">
-                  <%= @credit_card.expiry_date%>
-                  <div class="input-group-append">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="ccnumber">Expiry Date</label>
+                  <div class="input-group">
+                    <%= credit_card.expiry_date %>
+                    <div class="input-group-append">
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="card-footer">
-            <%= link_to "Edit Credit Card", edit_credit_card_path(@credit_card), class: "btn btn-primary btn-lg" %>
+            <div class="card-footer">
+              <%= link_to "Edit Credit Card", edit_credit_card_path(credit_card), class: "btn btn-primary btn-lg" %>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
 

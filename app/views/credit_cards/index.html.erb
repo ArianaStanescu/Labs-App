@@ -30,14 +30,13 @@
     </thead>
     <tbody>
     <% @credit_cards.each do |credit_card| %>
-      <% if (@user.id == credit_card.user_id) %>
+      <%# if (@user.id == credit_card.user_id) %>
         <tr>
           <td><%= credit_card.number %></td>
           <td><%= credit_card.expiry_date %></td>
-<!--          <td><%#= credit_card.user_id %></td>-->
           <td><%= link_to 'Show', credit_card %> | <%= link_to 'Edit', edit_credit_card_path(credit_card) %> | <%= link_to 'Destroy', credit_card, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
         </tr>
-      <% end %>
+      <%# end %>
     <%end %>
 
     </tbody>
