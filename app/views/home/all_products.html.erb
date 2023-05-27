@@ -37,7 +37,12 @@
             <p class="card-text">Price: <%= product.price %>$</p>
             <div class="mt-auto">
               <%#= link_to 'Add To Cart', product, class: "btn btn-primary" %>
-              <%= link_to 'Add To Cart', all_products_path, class: "btn btn-primary" %>
+              <% if current_user.present? %>
+                <%#= link_to 'Buy Now', all_products_path, class: "btn btn-primary" %>
+                <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
+              <% else %>
+                <p class="text-muted mb-0"> You need to be logged in to order!</p>
+              <% end %>
             </div>
           </div>
           <br>
