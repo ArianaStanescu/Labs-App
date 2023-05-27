@@ -5,8 +5,17 @@
   <div class="text-center text-lg-start mt-4 pt-2">
     <br>
     <br>
-    <h2>Sign up</h2>
+    <h2 style="font-family: Lucida Handwriting; text-align: center">Sign up</h2>
     <div class="field", style="width: 250px; margin: 0 auto;">
+      <div class="field", style="width: 250px; margin: 0 auto;">
+        <%= f.text_field :name, required: true, class: "form-control", placeholder: "Name" %>
+      </div>
+      <br>
+      <div class="field", style="width: 250px; margin: 0 auto;">
+        <%= f.text_field :phone, required: true, class: "form-control", placeholder: "Phone" %>
+      </div>
+      <br>
+      <div class="field", style="width: 250px; margin: 0 auto;">
       <%= f.email_field :email, autofocus: true, autocomplete: "email" , class: "form-control", placeholder: "Email" %>
     </div>
 
@@ -23,12 +32,31 @@
 
     <br>
 
-<!--    <div class="form-check", style="width: 250px; margin: 0 auto;">-->
-      <%#= f.check_box :terms_and_conditions, class: "form-check-input" %>
-      <%#= f.label :terms_and_conditions, class: "form-check-label" do %>
-<!--        I agree all statements in <a href="#">Terms of service</a>.-->
+
+
+    <br>
+
+    <%#= fields_for :credit_cards, @user.credit_cards.build do |cc_form| %>
+<!--      <div class="field", style="width: 250px; margin: 0 auto;">-->
+        <%#= cc_form.text_field :number, class: "form-control", placeholder: "Card Number" %>
+<!--      </div>-->
+<!--      <br>-->
+<!--      <div class="field", style="width: 250px; margin: 0 auto;">-->
+        <%#= cc_form.date_field :expiry_date, class: "form-control", placeholder: "Expiry date" %>
+<!--      </div>-->
+    <%# end %>
+
+
+<!--    <div id="credit-cards">-->
+      <%#= f.fields_for :credit_cards, @user.credit_cards.build do |cc_form| %>
+        <%#= render "credit_card_fields", f: cc_form %>
       <%# end %>
 <!--    </div>-->
+
+    <%#= link_to "Add Credit Card",  :credit_cards, partial: "_credit_card_fields" %>
+
+
+
 
 
 
@@ -41,3 +69,5 @@
 <%= render "devise/shared/links" %>
 </div>
 </div>
+</div>
+<br>

@@ -1,10 +1,15 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: %i[ show edit update destroy ]
   before_action :authenticate_user!, except: [:show]
+  before_action :check_admin , except: [:show]
+  before_action :set_product, only: %i[ show edit update destroy ]
   # GET /products or /products.json
+  include Pagy::Backend
   def index
-    @products = Product.all
-    @products = Product.paginate(page: params[:page], per_page: 10)
+
+    @products = Product.includes(:category).all
+    # @products = Product.includes(:category).order(:size).all
+    @pagy, @products = pagy(@products)
+    # @products = Product.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /products/1 or /products/1.json
@@ -66,6 +71,6 @@ class ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
   def product_params
-    params.require(:product).permit(:id, :name, :description, :product_image, :sku, :stock, :metal, :size, :price, :category_id)
+    params.require(:product).permit(:id, :name, :description, :product_image, :sku, :stock, :metal, :size, :price, :category_id, :image)
   end
 end

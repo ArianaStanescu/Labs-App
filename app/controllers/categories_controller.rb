@@ -1,6 +1,7 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
+  before_action :check_admin
+  # before_action :set_product, only: %i[ show edit update destroy ]
   # GET /categories or /categories.json
   def index
     @categories = Category.all
@@ -8,6 +9,14 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1 or /categories/1.json
   def show
+    # initial asa era si mergea
+    # @products = @category.products
+
+
+    # @products = Product.all
+    # @categories = Category.all
+
+    @category = Category.find(params[:id])
     @products = @category.products
   end
 
@@ -18,6 +27,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories/1/edit
   def edit
+    @category = Category.find(params[:id])
   end
 
   # POST /categories or /categories.json

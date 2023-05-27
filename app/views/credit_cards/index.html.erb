@@ -1,0 +1,46 @@
+<!--<p style="color: green"><%#= notice %></p>-->
+
+<!--<h1>Credit cards</h1>-->
+
+<!--<div id="credit_cards">-->
+  <%# @credit_cards.each do |credit_card| %>
+    <%#= render credit_card %>
+<!--    <p>-->
+      <%#= link_to "Show this credit card", credit_card %>
+<!--    </p>-->
+  <%# end %>
+<!--</div>-->
+
+<%#= link_to "New credit card", new_credit_card_path %>
+
+<div class="container mt-5" style="font-family: Verdana">
+  <h1 style="font-family: Lucida Handwriting; text-align: center">Credit cards</h1>
+  <%= link_to "New credit card", new_credit_card_path, style:"font-size: large" %>
+  <br><br>
+
+  <table class="table table-info table-striped table-hover table-sm">
+    <thead>
+    <tr style="background-color: #e6f2ff">
+      <th scope="col">Number</th>
+      <th scope="col">Expiry Date</th>
+<!--      <th scope="col">User ID</th>-->
+      <th scope="col">Action</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <% @credit_cards.each do |credit_card| %>
+      <%# if (@user.id == credit_card.user_id) %>
+        <tr>
+          <td><%= credit_card.number %></td>
+          <td><%= credit_card.expiry_date %></td>
+          <td><%= link_to 'Show', credit_card %> | <%= link_to 'Edit', edit_credit_card_path(credit_card) %> | <%= link_to 'Destroy', credit_card, data: { turbo_method: :delete, confirm: 'Are you sure?' } %></td>
+        </tr>
+      <%# end %>
+    <%end %>
+
+    </tbody>
+  </table>
+
+
+</div>
