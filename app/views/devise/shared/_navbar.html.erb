@@ -70,7 +70,7 @@
         </li>
 
         <li class="nav-item">
-          <% if current_user.present? %>
+          <% if current_user.present?  && current_user.role == "admin" %>
             <%= link_to "Orders", orders_path, class: "nav-link" %>
           <%end %>
         </li>

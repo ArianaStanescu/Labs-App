@@ -3,6 +3,7 @@
 class User::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  skip_before_action :verify_authenticity_token
 
   # GET /resource/sign_up
   # def new
@@ -28,6 +29,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def destroy
   #   super
   # end
+
+
+
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
