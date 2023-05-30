@@ -1,17 +1,48 @@
-<%= form_with(model: address) do |form| %>
-  <% if address.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>
+<%#= form_with(model: address) do |form| %>
+  <%# if address.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(address.errors.count, "error") %> prohibited this address from being saved:</h2>-->
 
-      <ul>
-        <% address.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<!--      <ul>-->
+        <%# address.errors.each do |error| %>
+<!--          <li><%#= error.full_message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
 
-  <div>
-    <%= form.submit %>
+<!--  <div>-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>
+
+<%= form_for(@address) do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <div class="field", style="width: 350px; margin: 0 auto;">
+    <%= f.text_field :country, required: true, class: "form-control", placeholder: "Country"%>
+  </div>
+  <br>
+  <div class="field", style="width: 350px; margin: 0 auto;">
+    <%= f.text_field :city, required: true, class: "form-control", placeholder: "City"%>
+  </div>
+  <br>
+  <div class="field", style="width: 350px; margin: 0 auto;">
+    <%= f.text_field :street, autofocus: true, required: true, class: "form-control", placeholder: "Address"%>
+  </div>
+  <br>
+  <div class="field", style="width: 350px; margin: 0 auto;">
+    <%= f.text_field :zip, required: true, class: "form-control", placeholder: "ZIP"%>
+  </div>
+  <br>
+
+  <div class="field", style="width: 350px; margin: 0 auto;">
+    <%= f.select :address_type, options_for_select(Address.address_types.keys, prompt: "Address Type"), {}, class: "form-control" %>
+  </div>
+
+  <br>
+
+
+  <div class="field", style="width: 100px; margin: 0 auto;">
+    <%= f.submit "Create", class: "btn btn-primary btn-block mb-4" %>
   </div>
 <% end %>

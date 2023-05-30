@@ -1,9 +1,12 @@
 class AddressesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_address, only: %i[ show edit update destroy ]
 
   # GET /addresses or /addresses.json
   def index
     @addresses = Address.all
+  #   @user = current_user
+  #   @addresses = @user.addresses
   end
 
   # GET /addresses/1 or /addresses/1.json
@@ -65,6 +68,6 @@ class AddressesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def address_params
-      params.fetch(:address, {})
+      params.require(:address).permit(:user_id, :country, :city, :street, :zip, :address_type)
     end
 end
