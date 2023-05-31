@@ -21,8 +21,10 @@
   <table class="table table-info table-striped table-hover table-sm">
     <thead>
     <tr style="background-color: #e6f2ff">
+      <th scope="col">Name</th>
       <th scope="col">Number</th>
       <th scope="col">Expiry Date</th>
+      <th scope="col">CVV</th>
 <!--      <th scope="col">User ID</th>-->
       <th scope="col">Action</th>
 
@@ -32,7 +34,9 @@
     <% @credit_cards.each do |credit_card| %>
       <%# if (@user.id == credit_card.user_id) %>
         <tr>
+          <td><%= credit_card.name %></td>
           <td><%= credit_card.number %></td>
+          <td><%= credit_card.cvv %></td>
           <td><%= credit_card.expiry_date %></td>
           <td><%= link_to 'Show', credit_card %> | <%= link_to 'Edit', edit_credit_card_path(credit_card) %> | <%= link_to 'Destroy', credit_card, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
         </tr>

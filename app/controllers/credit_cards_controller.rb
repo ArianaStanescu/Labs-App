@@ -71,6 +71,6 @@ class CreditCardsController < ApplicationController
     # end
 
   def credit_card_params
-    params.require(:credit_card).permit(:id, :number, :expiry_date, :user_id)
+    params.require(:credit_card).permit(:id, :number, :expiry_date, :user_id, :name, :cvv)
   end
 end

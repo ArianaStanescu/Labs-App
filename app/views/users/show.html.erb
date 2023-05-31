@@ -61,6 +61,15 @@
           <div class="card-body">
             <% @credit_cards.each_with_index do |card, index| %>
             <h5 class="mb-3"><strong>Credit Card <%= index + 1 %></strong></h5>
+              <div class="row">
+                <div class="col-sm-3">
+                  <p class="mb-0">Name</p>
+                </div>
+                <div class="col-sm-9">
+                  <p class="text-muted mb-0"> <%= card.name %></p>
+                </div>
+              </div>
+              <hr>
             <div class="row">
               <div class="col-sm-3">
                 <p class="mb-0">Number</p>
@@ -78,12 +87,13 @@
                 <p class="text-muted mb-0"><%= card.expiry_date %></p>
               </div>
             </div>
+              <hr>
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">CVV</p>
                 </div>
                 <div class="col-sm-9">
-<!--                  <p class="text-muted mb-0"><%#= card.cvv %></p>-->
+                  <p class="text-muted mb-0"><%= card.cvv %></p>
                 </div>
 
               </div>
@@ -92,7 +102,7 @@
 
               <hr>
               <% end %>
-            <hr>
+
             <%= link_to 'Add New Card', new_credit_card_path, class: "btn btn-primary" %>
             <%= link_to 'View My Cards', user_credit_cards_path(current_user), class: "btn btn-primary" %>
 
