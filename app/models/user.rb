@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :credit_cards
   has_many :orders
+  has_many :addresses
   accepts_nested_attributes_for :credit_cards
   validates :phone, presence: true, length: { is: 10 }
 end

@@ -2,8 +2,8 @@
   <h2 style="font-family: Lucida Handwriting; text-align: center">Products</h2>
   <%= link_to 'New product', new_product_path, style:"font-size: large" %>
   <br><br>
-  <% product_count = @products.count %>
-  <p style="font-family: Verdana; "> <%= product_count %> Products</p>
+  <%# product_count = @products.count %>
+<!--  <p style="font-family: Verdana; "> <%#= product_count %> Products</p>-->
 
 <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
   <table class="table table-info table-striped table-hover table-sm">

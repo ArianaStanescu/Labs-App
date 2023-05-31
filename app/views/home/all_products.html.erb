@@ -13,13 +13,13 @@
       <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),
                      class: "form-control", style: "width: 180px", id: "sort-select") %>
     </div>
-
   <% end %>
+
   <div class="ml-auto", style="text-align: right">
     <%= link_to "Size Guide", "#bottom-section", class: "text-right scroll-link" %>
   </div>
-  <br>
 
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
         <div id="products" class="card" style="width: 20rem; align-items: center; margin: 0 auto; background-color: #e6f2ff">
@@ -51,7 +51,7 @@
       <% end %>
 
   </div>
-
+  <%== pagy_nav(@pagy) %>
 </div>
   <div id="bottom-section" style="display: flex; justify-content: center; align-items: center;">
     <%= image_tag "rings_size_guide1.png", style: "width: 35rem" %>

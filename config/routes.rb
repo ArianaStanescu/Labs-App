@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :addresses
   resources :orders
   resources :credit_cards
   resources :categories
@@ -26,10 +27,14 @@ Rails.application.routes.draw do
   # get "edit", to: 'users#new'
 
   get 'all_products', to: 'home#all_products', as:"all_products"
-  get 'my_account', to: 'home#my_account', as:"my_account"
+  # get 'my_account', to: 'home#my_account', as:"my_account"
+  get 'my_account', to: 'users#show'
 
   resources :users do
     resources :credit_cards
+    resources :addresses
   end
+
+
 
 end
