@@ -2,8 +2,8 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin, except: [:show, :create]
   before_action :set_order, only: %i[ show edit update destroy ]
-
   include Pagy::Backend
+  require 'securerandom'
   # GET /orders or /orders.json
   def index
     @orders = Order.includes(:product, :user).all
@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-
+    @order.tracking_number = generate_tracking_number
     respond_to do |format|
       if @order.save
         product = @order.product
@@ -73,4 +73,18 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:id, :user_id, :product_id, :status, :tracking_number, :quantity)
   end
+
+  def generate_tracking_number
+    alphanumeric_characters = [*'0'..'9', *'A'..'Z']
+    tracking_number = ""
+
+    12.times do
+      random_character = alphanumeric_characters.sample
+      tracking_number += random_character
+    end
+
+    tracking_number
+  end
+
+
 end
