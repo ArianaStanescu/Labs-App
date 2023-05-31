@@ -1,17 +1,24 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin, except: [:show, :create]
+  # before_action :check_admin, except: [:show, :create]
   before_action :set_order, only: %i[ show edit update destroy ]
   include Pagy::Backend
   require 'securerandom'
   # GET /orders or /orders.json
   def index
-    @orders = Order.includes(:product, :user).all
+    # @orders = Order.includes(:product, :user).all
+    @user = current_user
+    if @user.role == "client"
+      @orders = @user.orders
+    else
+      @orders = Order.includes(:product, :user).all
+    end
     @pagy, @orders = pagy(@orders)
   end
 
   # GET /orders/1 or /orders/1.json
   def show
+    @user = current_user
   end
 
   # GET /orders/new
