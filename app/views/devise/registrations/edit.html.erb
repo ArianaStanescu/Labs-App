@@ -90,7 +90,8 @@
     <br>
 <!--    <div class="actions " style="width: 100px; margin: 0 auto;">-->
     <div class="actions" style="display: flex; justify-content: center; align-items: center; width: 100px; margin: 0 auto;">
-      <%= button_to "Back", :back, class: "btn btn-primary btn-block mb-4", style: "margin-right: 5px;" %>
+      <%= link_to "Back to my account", my_account_path, class: "btn btn-primary", style: "margin-right: 5px;" %>
+      <%#= button_to "Back", :back, class: "btn btn-primary btn-block mb-4", style: "margin-right: 5px;" %>
       <%= f.submit "Update", class: "btn btn-primary btn-block mb-4" %>
     </div>
 
@@ -105,7 +106,6 @@
                       class: "btn btn-primary btn-block mb-4",
                       style: "background-color: pink; border-color: pink; color: white;" %>
       </p>
-      <%= link_to "Back", :back %>
     </div>
   <% end %>
 

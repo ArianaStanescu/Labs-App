@@ -11,6 +11,8 @@ class AddressesController < ApplicationController
 
   # GET /addresses/1 or /addresses/1.json
   def show
+    @user = current_user
+    @addresses = current_user.addresses
   end
 
   # GET /addresses/new
