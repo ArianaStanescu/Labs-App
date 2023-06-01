@@ -40,7 +40,10 @@
         <td><%= order.quantity %></td>
         <td><%= order.status %></td>
         <td><%= order.tracking_number %></td>
-        <td><%= link_to 'Show', order %> | <%= link_to 'Edit', edit_order_path(order) %> | <%= link_to 'Destroy', order, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
+<!--        <td><%#= link_to 'Show', order %> | <%#= link_to 'Edit', edit_order_path(order) %> | <%#= link_to 'Destroy', order, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>-->
+        <td><%= link_to 'Show', order %> | <%= link_to 'Edit', edit_order_path(order) %> |
+          <%= button_to 'Destroy', order, method: :delete, form:
+            { data: { turbo: true, turbo_confirm: 'Are you sure?' } } %></td>
       </tr>
     <% end %>
 

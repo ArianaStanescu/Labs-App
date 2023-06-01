@@ -19,6 +19,10 @@ class OrdersController < ApplicationController
   # GET /orders/1 or /orders/1.json
   def show
     @user = current_user
+    @order = Order.find(params[:id])
+    if @order.user_id != current_user.id
+      redirect_to root_path, alert: "You are not authorized to edit this credit card."
+    end
   end
 
   # GET /orders/new
@@ -28,6 +32,11 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @user = current_user
+    @order = Order.find(params[:id])
+    if @order.user_id != current_user.id
+      redirect_to root_path, alert: "You are not authorized to edit this credit card."
+    end
   end
 
   # POST /orders or /orders.json

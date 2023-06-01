@@ -38,7 +38,9 @@
           <td><%= credit_card.number %></td>
           <td><%= credit_card.cvv %></td>
           <td><%= credit_card.expiry_date %></td>
-          <td><%= link_to 'Show', credit_card %> | <%= link_to 'Edit', edit_credit_card_path(credit_card) %> | <%= link_to 'Destroy', credit_card, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
+          <td><%= link_to 'Show', credit_card %> | <%= link_to 'Edit', edit_credit_card_path(credit_card) %> |
+            <%= button_to 'Destroy', credit_card, method: :delete, form:
+              { data: { turbo: true, turbo_confirm: 'Are you sure?' } } %></td>
         </tr>
       <%# end %>
     <%end %>
