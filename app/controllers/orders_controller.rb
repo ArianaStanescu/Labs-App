@@ -34,8 +34,9 @@ class OrdersController < ApplicationController
   def edit
     @user = current_user
     @order = Order.find(params[:id])
-    if @order.user_id != current_user.id
-      redirect_to root_path, alert: "You are not authorized to edit this credit card."
+    # if @order.user_id != current_user.id
+    if @user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized to edit this order."
     end
   end
 
