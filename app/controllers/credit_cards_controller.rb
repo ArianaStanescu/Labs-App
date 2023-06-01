@@ -9,19 +9,19 @@ class CreditCardsController < ApplicationController
   end
 
   # GET /credit_cards/1 or /credit_cards/1.json
-  def show
-    @credit_card = CreditCard.find(params[:id])
-    if @credit_card.user_id != current_user.id
-      redirect_to root_path, alert: "You are not authorized to edit this credit card."
-    end
-  end
-
   # def show
   #   @credit_card = CreditCard.find(params[:id])
   #   if @credit_card.user_id != current_user.id
-  #     flash[:alert] = "You are not authorized to view this credit card."
+  #     redirect_to root_path, alert: "You are not authorized to edit this credit card."
   #   end
   # end
+
+  def show
+    @credit_card = CreditCard.find(params[:id])
+    if @credit_card.user_id != current_user.id
+      redirect_to root_path, alert: 'You are not authorized to view this credit card.'
+    end
+  end
 
   # GET /credit_cards/new
   def new
