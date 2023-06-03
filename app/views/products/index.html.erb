@@ -5,6 +5,8 @@
   <%# product_count = @products.count %>
 <!--  <p style="font-family: Verdana; "> <%#= product_count %> Products</p>-->
 
+  <%= render "filter_menu" %>
+
 <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
   <table class="table table-info table-striped table-hover table-sm">
     <thead>

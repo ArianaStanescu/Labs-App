@@ -26,7 +26,7 @@
           <%#= image_tag product.product_image + ".jpg", style:"width: 20rem" %>
           <div style="position: relative;">
             <%#= image_tag product.product_image + ".jpg", style: "width: 20rem" %>
-            <%= image_tag product.image.attached? ? product.image : "gift.png", style: "width: 20rem" %>
+            <%= image_tag product.image.present? ? product.image : "gift.png", style: "width: 20rem" %>
             <a href="<%= product_path(product) %>" class="btn btn-primary image-btn" style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">View Details</a>
           </div>
           <div class="card-body" style="text-align: center; align-items: center">
