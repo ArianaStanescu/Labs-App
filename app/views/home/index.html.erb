@@ -34,23 +34,13 @@
 
 <div class="image-list-home">
   <ul>
-    <li  id="home-list1">
-      <!--      <img src="images/ring.jpg">-->
-      <%= image_tag "ring.jpg", class: "custom", alt: "Ring" %>
-
-    </li>
-    <li  id="home-list1">
-      <!--      <img src="images/earrings.jpg">-->
-      <%= image_tag "earrings.jpg", class: "custom", alt: "Earrings" %>
-    </li>
-    <li  id="home-list1">
-      <!--      <img src="images/bracelet.jpg">-->
-      <%= image_tag "bracelet.jpg", class: "custom", alt: "Bracelets" %>
-    </li>
-    <li  id="home-list1">
-      <!--      <img src="images/necklace.jpg">-->
-      <%= image_tag "necklace.jpg", class: "custom", alt: "Necklaces" %>
-    </li>
+    <% @products.each do |product| %>
+      <li id="home-list1">
+        <%= link_to product_path(product) do %>
+          <%= image_tag(product.image.present? ? product.image : "gift.png") %>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </div>
 

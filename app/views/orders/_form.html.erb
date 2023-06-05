@@ -1,17 +1,55 @@
-<%= form_with(model: order) do |form| %>
-  <% if order.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<%#= form_with(model: order) do |form| %>
+  <%# if order.errors.any? %>
+<!--    <div style="color: red">-->
+<!--      <h2><%#= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>-->
 
-      <ul>
-        <% order.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<!--      <ul>-->
+        <%# order.errors.each do |error| %>
+<!--          <li><%#= error.full_message %></li>-->
+        <%# end %>
+<!--      </ul>-->
+<!--    </div>-->
+  <%# end %>
 
-  <div>
-    <%= form.submit %>
+<!--  <div>-->
+    <%#= form.submit %>
+<!--  </div>-->
+<%# end %>
+<%#= form_for(@order) do |f| %>
+<!--  <div class="form-outline mb-4">-->
+    <%#= f.text_field :tracking_number, autofocus: true, required: true, class: "form-control", placeholder: "Tracking Number", id: "order_tracking_number" %>
+<!--  </div>-->
+
+  <%#= button_to 'Generare Tracking Number', generate_tracking_number_path, remote: true, method: :post, id: 'generate-button' %>
+<!--  <div class="actions">-->
+    <%#= f.submit "Ship Now!", class: "btn btn-primary btn-block mb-4" %>
+<!--  </div>-->
+<%# end %>
+
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        $('#generate-button').click(function(e) {-->
+<!--            e.preventDefault();-->
+<!--            $.ajax({-->
+<!--                url: '<%#= generate_tracking_number_path %>',-->
+<!--                type: 'POST',-->
+<!--                dataType: 'json',-->
+<!--                success: function(data) {-->
+<!--                    var trackingNumber = data.tracking_number;-->
+<!--                    $('#order_tracking_number').val(trackingNumber);-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+
+<%= form_for(@order) do |f| %>
+<!--  <div class="field", style="width: 350px; margin: 0 auto;">-->
+    <%#= f.text_field :tracking_number, autofocus: true, required: true, class: "form-control", placeholder: "Tracking Number"%>
+<!--  </div>-->
+  <br>
+  <div class="field", style="width: 350px; margin: 0 auto; text-color: white;
+    font-family: Verdana;">
+    <%= f.submit "Ship Now!", class: "btn btn-primary-2 btn-block mb-4 btn-white-text" %>
   </div>
 <% end %>

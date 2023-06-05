@@ -5,6 +5,7 @@ class HomeController < ApplicationController
   # end
 
   def index
+    @products = Product.where(id: [3, 6, 7, 26])
   end
 
   def all_products

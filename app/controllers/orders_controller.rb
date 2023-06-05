@@ -20,8 +20,8 @@ class OrdersController < ApplicationController
   def show
     @user = current_user
     @order = Order.find(params[:id])
-    if @order.user_id != current_user.id
-      redirect_to root_path, alert: "You are not authorized to edit this credit card."
+    if @order.user_id != current_user.id && current_user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized to show this order."
     end
   end
 
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-    @order.tracking_number = generate_tracking_number
+    # @order.tracking_number = generate_tracking_number
     respond_to do |format|
       if @order.save
         product = @order.product
@@ -60,9 +60,13 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
     respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
-        format.json { render :show, status: :ok, location: @order }
+      # if @order.update(order_params)
+      #   format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
+      #   format.json { render :show, status: :ok, location: @order } order_params.present? &&
+      if  @order.update(tracking_number:  generate_tracking_number, status: :shipped)
+        # @order.tracking_number = generate_tracking_number
+              format.html { redirect_to order_url(@order), notice: "Order was successfully shipped." }
+              format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -91,6 +95,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:id, :user_id, :product_id, :status, :tracking_number, :quantity)
   end
 
+  private
   def generate_tracking_number
     alphanumeric_characters = [*'0'..'9', *'A'..'Z']
     tracking_number = ""
@@ -101,6 +106,7 @@ class OrdersController < ApplicationController
     end
 
     tracking_number
+    # render json: { tracking_number: tracking_number }
   end
 
 

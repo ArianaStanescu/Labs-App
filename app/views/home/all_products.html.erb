@@ -23,25 +23,28 @@
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
         <div id="products" class="card" style="width: 20rem; align-items: center; margin: 0 auto; background-color: #e6f2ff">
-          <%#= image_tag product.product_image + ".jpg", style:"width: 20rem" %>
-          <div style="position: relative;">
-            <%#= image_tag product.product_image + ".jpg", style: "width: 20rem" %>
-            <%= image_tag product.image.present? ? product.image : "gift.png", style: "width: 20rem" %>
+          <div style="position: relative; background-color: #888888">
+            <% if product.stock == 0 %>
+              <%= image_tag product.image.present? ? product.image : "gift.png", style: "width: 20rem; opacity: 0.6;" %>
+
+
+          <% else %>
+              <%= image_tag product.image.present? ? product.image : "gift.png", style: "width: 20rem" %>
+            <% end %>
             <a href="<%= product_path(product) %>" class="btn btn-primary image-btn" style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">View Details</a>
           </div>
           <div class="card-body" style="text-align: center; align-items: center">
             <h5 class="card-title" style="font-size: large"><%= product.name %></h5>
-<!--            <p class="card-text"><%#= product.description %></p>-->
             <p class="card-text">Metal: <%= product.metal %> </p>
             <p class="card-text"> Size: <%= product.size %> </p>
             <p class="card-text">Price: <%= product.price %>$</p>
             <div class="mt-auto">
-              <%#= link_to 'Add To Cart', product, class: "btn btn-primary" %>
-              <% if current_user.present? %>
-                <%#= link_to 'Buy Now', all_products_path, class: "btn btn-primary" %>
+              <% if current_user.present? && product.stock > 0 %>
                 <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
-              <% else %>
-                <p class="text-muted mb-0"> You need to be logged in to order!</p>
+              <% elsif product.stock == 0%>
+                  <p class="text-muted mb-0" style="color:#82adff"> This item is out of stock!</p>
+                <% else %>
+                <p class="text-muted mb-0" style="color:#82adff"> You need to be logged in to order!</p>
               <% end %>
             </div>
           </div>
@@ -56,7 +59,6 @@
   <div id="bottom-section" style="display: flex; justify-content: center; align-items: center;">
     <%= image_tag "rings_size_guide1.png", style: "width: 35rem" %>
     <%= image_tag "rings_size_guide2.png", style: "width: 35rem" %>
-    <%#= image_tag "bracelet_size_guide.png", style: "width: 35rem" %>
   </div>
 </div>
 
