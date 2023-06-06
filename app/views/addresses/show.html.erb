@@ -1,16 +1,16 @@
 <section>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-lg-8 mx-auto" style="margin-left: 200px">
+      <div class="col-lg-5 mx-auto" style="margin-left: 350px;">
         <% if @address.address_type == 'both' %>
-          <%= render 'address', address_type: "Shipping", address: @address, edit_link: edit_address_path(@address) %>
-          <%= render 'address', address_type: "Billing", address: @address, edit_link: edit_address_path(@address) %>
+          <%= render 'users/address', address_type: "Shipping", address: @address, edit_link: edit_address_path(@address) %>
+          <%= render 'users/address', address_type: "Billing", address: @address, edit_link: edit_address_path(@address) %>
         <% end %>
         <% if @address.address_type == 'shipping' %>
-          <%= render 'address', address_type: "Shipping", address: @address, edit_link: edit_address_path(@address) %>
+          <%= render 'users/address', address_type: "Shipping", address: @address, edit_link: edit_address_path(@address) %>
         <% end %>
         <% if @address.address_type == 'billing' %>
-          <%= render 'address', address_type: "Billing", address: @address, edit_link: edit_address_path(@address) %>
+          <%= render 'users/address', address_type: "Billing", address: @address, edit_link: edit_address_path(@address) %>
         <% end %>
       </div>
     </div>

@@ -1,16 +1,16 @@
 <div class="row justify-content-center">
   <div class="card mb-4 mb-md-0">
   <div class="card mb-4">
-    <div class="card-body">
+    <div class="card-body" style="background-color: #e6f2ff">
       <div class="row">
         <div class="col-md-11">
           <h5><strong><%= address_type %> Address</strong></h5>
         </div>
-        <div class="col-md-1">
-          <%= link_to "Edit", edit_link, class: "text-success" %>
-        </div>
+<!--        <div >-->
+          <%#= link_to "Edit", edit_link, class: "text-success" %>
+<!--        </div>-->
       </div>
-      <div class="row">
+      <div class="row" style="height:10px">
         <div class="col-sm-4">
           <p class="mb-0">Street Address</p>
         </div>
@@ -18,8 +18,8 @@
           <p class="text-muted mb-0"><%= address.street %></p>
         </div>
       </div>
-      <hr>
-      <div class="row">
+      <hr style="border-color: #D6EAF8">
+      <div class="row" style="height:10px">
         <div class="col-sm-4">
           <p class="mb-0">City</p>
         </div>
@@ -27,8 +27,8 @@
           <p class="text-muted mb-0"><%= address.city %></p>
         </div>
       </div>
-      <hr>
-      <div class="row">
+      <hr style="border-color: #D6EAF8">
+      <div class="row" style="height:10px">
         <div class="col-sm-4">
           <p class="mb-0">ZIP</p>
         </div>
@@ -36,10 +36,11 @@
           <p class="text-muted mb-0"><%= address.zip %></p>
         </div>
       </div>
-      <hr>
-      <div class="row">
+      <hr style="border-color: #D6EAF8">
+      <div class="row" style="height:10px">
         <div class="col-sm-4">
           <p class="mb-0">Country</p>
+          <%= link_to 'Edit', edit_address_path(address), class: "btn btn-primary" %>
         </div>
         <div class="col-sm-8">
           <p class="text-muted mb-0"><%= address.country %></p>
