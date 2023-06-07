@@ -1,3 +1,4 @@
+
 <div class="container mt-5" style="font-family: Verdana">
   <div class="image-container">
     <h1 class="image-text" style="font-family: Lucida Handwriting">All Products</h1>
@@ -10,11 +11,13 @@
   <%= form_tag(all_products_path, method: 'get', id: "sort-form", class: "form-inline") do %>
     <div class="form-group mr-2">
       <label for="sort_order" class="mr-2">Sort: </label>
-      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),
-                     class: "form-control", style: "width: 180px", id: "sort-select") %>
+      <div>
+
+      </div>
     </div>
   <% end %>
   <br>
+  <%#= render 'order_menu' %>
   <%= render "filter_menu" %>
 
   <div class="ml-auto", style="text-align: right">
@@ -80,16 +83,15 @@
 <% end %>
 
 
-<script>
-    // Obținem referința către selectul de sortare și adăugăm un eveniment pentru schimbarea valorii
-    const sortSelect = document.getElementById('sort-select');
-    sortSelect.addEventListener('change', () => {
-        const selectedValue = sortSelect.value;
-        const currentUrl = new URL(window.location.href);
-        currentUrl.searchParams.set('sort_order', selectedValue);
-        window.location.href = currentUrl.href;
-    });
-</script>
+<!--<script>-->
+<!--    const sortSelect = document.getElementById('sort-select');-->
+<!--    sortSelect.addEventListener('change', () => {-->
+<!--        const selectedValue = sortSelect.value;-->
+<!--        const currentUrl = new URL(window.location.href);-->
+<!--        currentUrl.searchParams.set('sort_order', selectedValue);-->
+<!--        window.location.href = currentUrl.href;-->
+<!--    });-->
+<!--</script>-->
 
 
 

@@ -1,4 +1,11 @@
-<%= form_tag all_products_path, method: :get, class: 'form-inline', id: 'orders-form' do %>
+<%= form_tag all_products_path, method: :get, class: 'form-inline', id: 'order-form' do %>
+
+  <div>
+    <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), prompt: 'All',
+                   class: "form-control", style: "width: 180px", id: "sort-select") %>
+  </div>
+  <br>
+
   <%= label_tag :category_id, 'Category:' %>
   <%= select_tag :category_id, options_for_select(Category.all.pluck(:name, :id), params[:category_id]), prompt: 'All',  class: "form-control"%>
 
