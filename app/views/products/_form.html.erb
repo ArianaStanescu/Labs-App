@@ -36,13 +36,51 @@
       <%= f.collection_select(:category_id, Category.all, :id, :name, {:include_blank => "Select..."} , {:required => true, :class => "form-control"}) %>
     </div>
     <br>
-    <div class="field", style="width: 350px; margin: 0 auto;">
-      <%= f.file_field :image, required: true, class: "form-control", placeholder: "Image"%>
+<!--    <div class="field", style="width: 350px; margin: 0 auto;">-->
+      <%#= f.file_field :image, required: true, class: "form-control", placeholder: "Image"%>
+<!--    </div>-->
+<!--    <div class="field", style="width: 350px; margin: 0 auto;">-->
+      <%# if @product.image.present? %>
+<!--        <p style="background-color: white" >Selected image: <%#= @product.image %></p>-->
+      <%# else %>
+        <%#= f.file_field :image, required: true, class: "form-control", placeholder: "Image" %>
+      <%# end %>
+<!--    </div>-->
+    <div class="field" style="width: 350px; margin: 0 auto;">
+      <% if @product.image.attached? %>
+        <div class="image-name">
+          <p>Selected image: <%= @product.image.blob.filename.to_s %></p>
+        </div>
+        <br>
+        <%= f.file_field :image, class: "form-control hidden", style: "display: none;", id: "image-upload" %>
+        <%= label_tag "image-upload-label", "Change Image", class: "btn btn-primary", for: "image-upload" %>
+      <% else %>
+        <%= f.file_field :image, required: true, class: "form-control", placeholder: "Image" %>
+      <% end %>
     </div>
-
+    <br>
     <div class="actions">
       <%= link_to 'Back', products_path, class: "btn btn-primary btn-lg" %>
       <%= f.submit button_text, class: "btn btn-primary btn-lg" %>
     </div>
   </div>
 <% end %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageUpload = document.getElementById('image-upload');
+        const changeImageLabel = document.querySelector('label[for="image-upload"]');
+        const selectedImageText = document.querySelector('.image-name p');
+
+        changeImageLabel.addEventListener('click', function() {
+            imageUpload.click();
+        });
+
+        imageUpload.addEventListener('change', function() {
+            const filename = imageUpload.value.split('\\').pop();
+            selectedImageText.textContent = 'Selected image: ' + filename;
+        });
+    });
+</script>
+
+

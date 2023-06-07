@@ -40,7 +40,9 @@
         <td><%= address.street %></td>
         <td><%= address.zip %></td>
         <td><%= address.address_type %></td>
-        <td><%= link_to 'Show', address %> | <%= link_to 'Edit', edit_address_path(address) %> | <%= link_to 'Destroy', address, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', address %> | <%= link_to 'Edit', edit_address_path(address) %> |
+          <%= button_to 'Destroy', address, method: :delete, form:
+            { data: { turbo: true, turbo_confirm: 'Are you sure?' } } %></td>
       </tr>
       <%# end %>
     <%end %>

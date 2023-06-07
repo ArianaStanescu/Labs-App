@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 .btn-primary {
   background-color:  #8ab8ff;
@@ -8,6 +9,16 @@
 
 .btn-primary:hover {
   background-color: #82adff
+}
+
+.btn-primary-2 {
+  background-color:  #ffb3e6;
+
+  margin: 0 auto;
+}
+
+.btn-primary-2:hover {
+  background-color: #ff99dd;
 }
 
 a.text-success {
@@ -54,6 +65,13 @@ ul.dropdown-menu li:hover {
 #dropdown_li li{
   background-color: #e6f2ff;
 }
+
+.image-name {
+  background-color: white;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
 
 
 

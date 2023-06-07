@@ -1,0 +1,9 @@
+<%= form_tag all_products_path, method: :get, class: 'form-inline', id: 'order-form' do %>
+
+    <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),
+                   class: "form-control", style: "width: 180px", id: "sort-select") %>
+
+
+  <%= submit_tag 'Order', class: 'btn btn-primary mb-2' %>
+
+<% end %>

@@ -1,0 +1,19 @@
+<%= form_tag all_products_path, method: :get, class: 'form-inline', id: 'order-form' do %>
+
+  <div>
+    <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), prompt: 'All',
+                   class: "form-control", style: "width: 180px", id: "sort-select") %>
+  </div>
+  <br>
+
+  <%= label_tag :category_id, 'Category:' %>
+  <%= select_tag :category_id, options_for_select(Category.all.pluck(:name, :id), params[:category_id]), prompt: 'All',  class: "form-control"%>
+
+  <%= label_tag :metal, 'Metal:' %>
+  <%= select_tag :metal, options_for_select(Product.distinct.pluck(:metal).sort, params[:metal]), prompt: 'All',  class: "form-control"%>
+
+  <%= text_field_tag :search, params[:search], placeholder: 'Search', class: "form-control" %>
+
+  <%= submit_tag 'Filter', class: 'btn btn-primary mb-2' %>
+
+<% end %>

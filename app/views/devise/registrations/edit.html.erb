@@ -101,10 +101,11 @@
       <h3 class="text-center mt-6" style="font-family: Lucida Handwriting" >Unhappy?</h3>
 
       <p>
-        <%= button_to "Cancel my account", registration_path(resource_name),
-                      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                      class: "btn btn-primary btn-block mb-4",
+        <%= button_to 'Cancel my account', registration_path(resource_name), method: :delete, form:
+          { data: { turbo: true, turbo_confirm: 'Are you sure?' } }, class: "btn btn-primary btn-block mb-4",
                       style: "background-color: pink; border-color: pink; color: white;" %>
+
+
       </p>
     </div>
   <% end %>

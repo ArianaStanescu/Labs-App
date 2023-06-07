@@ -1,17 +1,28 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin, except: [:show, :create]
+  # before_action :check_admin, except: [:show, :create]
   before_action :set_order, only: %i[ show edit update destroy ]
-
   include Pagy::Backend
+  require 'securerandom'
   # GET /orders or /orders.json
   def index
-    @orders = Order.includes(:product, :user).all
+    # @orders = Order.includes(:product, :user).all
+    @user = current_user
+    if @user.role == "client"
+      @orders = @user.orders
+    else
+      @orders = Order.includes(:product, :user).all
+    end
     @pagy, @orders = pagy(@orders)
   end
 
   # GET /orders/1 or /orders/1.json
   def show
+    @user = current_user
+    @order = Order.find(params[:id])
+    if @order.user_id != current_user.id && current_user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized to show this order."
+    end
   end
 
   # GET /orders/new
@@ -21,12 +32,18 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    @user = current_user
+    @order = Order.find(params[:id])
+    # if @order.user_id != current_user.id
+    if @user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized to edit this order."
+    end
   end
 
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-
+    # @order.tracking_number = generate_tracking_number
     respond_to do |format|
       if @order.save
         product = @order.product
@@ -43,9 +60,13 @@ class OrdersController < ApplicationController
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
     respond_to do |format|
-      if @order.update(order_params)
-        format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
-        format.json { render :show, status: :ok, location: @order }
+      # if @order.update(order_params)
+      #   format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
+      #   format.json { render :show, status: :ok, location: @order } order_params.present? &&
+      if  @order.update(tracking_number:  generate_tracking_number, status: :shipped)
+        # @order.tracking_number = generate_tracking_number
+              format.html { redirect_to order_url(@order), notice: "Order was successfully shipped." }
+              format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @order.errors, status: :unprocessable_entity }
@@ -73,4 +94,20 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:id, :user_id, :product_id, :status, :tracking_number, :quantity)
   end
+
+  private
+  def generate_tracking_number
+    alphanumeric_characters = [*'0'..'9', *'A'..'Z']
+    tracking_number = ""
+
+    12.times do
+      random_character = alphanumeric_characters.sample
+      tracking_number += random_character
+    end
+
+    tracking_number
+    # render json: { tracking_number: tracking_number }
+  end
+
+
 end

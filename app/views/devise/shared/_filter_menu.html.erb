@@ -1,0 +1,12 @@
+<%= form_tag all_products_path, method: :get, class: 'form-inline', id: 'orders-form' do %>
+
+
+  <%= text_field_tag :search, params[:search], placeholder: 'Search item', class: "form-control", style:"width:120px" %>
+
+  <%#= submit_tag 'Search', class: 'btn btn-primary mb-2' %>
+
+  <%= button_tag type: 'submit', class: 'btn btn-primary mb-2' do %>
+    <i class="fas fa-search"></i>
+  <% end %>
+
+<% end %>

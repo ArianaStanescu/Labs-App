@@ -1,3 +1,4 @@
+
 <div class="container mt-5" style="font-family: Verdana">
   <div class="image-container">
     <h1 class="image-text" style="font-family: Lucida Handwriting">All Products</h1>
@@ -10,10 +11,14 @@
   <%= form_tag(all_products_path, method: 'get', id: "sort-form", class: "form-inline") do %>
     <div class="form-group mr-2">
       <label for="sort_order" class="mr-2">Sort: </label>
-      <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),
-                     class: "form-control", style: "width: 180px", id: "sort-select") %>
+      <div>
+
+      </div>
     </div>
   <% end %>
+  <br>
+  <%#= render 'order_menu' %>
+  <%= render "filter_menu" %>
 
   <div class="ml-auto", style="text-align: right">
     <%= link_to "Size Guide", "#bottom-section", class: "text-right scroll-link" %>
@@ -23,25 +28,28 @@
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
         <div id="products" class="card" style="width: 20rem; align-items: center; margin: 0 auto; background-color: #e6f2ff">
-          <%#= image_tag product.product_image + ".jpg", style:"width: 20rem" %>
-          <div style="position: relative;">
-            <%#= image_tag product.product_image + ".jpg", style: "width: 20rem" %>
-            <%= image_tag product.image.attached? ? product.image : "gift.png", style: "width: 20rem" %>
+          <div style="position: relative; background-color: #888888">
+            <% if product.stock == 0 %>
+              <%= image_tag product.image.present? ? product.image : "gift.png", style: "width: 20rem; opacity: 0.6;" %>
+
+
+          <% else %>
+              <%= image_tag product.image.present? ? product.image : "gift.png", style: "width: 20rem" %>
+            <% end %>
             <a href="<%= product_path(product) %>" class="btn btn-primary image-btn" style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">View Details</a>
           </div>
           <div class="card-body" style="text-align: center; align-items: center">
             <h5 class="card-title" style="font-size: large"><%= product.name %></h5>
-<!--            <p class="card-text"><%#= product.description %></p>-->
             <p class="card-text">Metal: <%= product.metal %> </p>
             <p class="card-text"> Size: <%= product.size %> </p>
             <p class="card-text">Price: <%= product.price %>$</p>
             <div class="mt-auto">
-              <%#= link_to 'Add To Cart', product, class: "btn btn-primary" %>
-              <% if current_user.present? %>
-                <%#= link_to 'Buy Now', all_products_path, class: "btn btn-primary" %>
+              <% if current_user.present? && product.stock > 0 %>
                 <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
-              <% else %>
-                <p class="text-muted mb-0"> You need to be logged in to order!</p>
+              <% elsif product.stock == 0%>
+                  <p class="text-muted mb-0" style="color:#82adff"> This item is out of stock!</p>
+                <% else %>
+                <p class="text-muted mb-0" style="color:#82adff"> You need to be logged in to order!</p>
               <% end %>
             </div>
           </div>
@@ -56,7 +64,6 @@
   <div id="bottom-section" style="display: flex; justify-content: center; align-items: center;">
     <%= image_tag "rings_size_guide1.png", style: "width: 35rem" %>
     <%= image_tag "rings_size_guide2.png", style: "width: 35rem" %>
-    <%#= image_tag "bracelet_size_guide.png", style: "width: 35rem" %>
   </div>
 </div>
 
@@ -76,16 +83,15 @@
 <% end %>
 
 
-<script>
-    // Obținem referința către selectul de sortare și adăugăm un eveniment pentru schimbarea valorii
-    const sortSelect = document.getElementById('sort-select');
-    sortSelect.addEventListener('change', () => {
-        const selectedValue = sortSelect.value;
-        const currentUrl = new URL(window.location.href);
-        currentUrl.searchParams.set('sort_order', selectedValue);
-        window.location.href = currentUrl.href;
-    });
-</script>
+<!--<script>-->
+<!--    const sortSelect = document.getElementById('sort-select');-->
+<!--    sortSelect.addEventListener('change', () => {-->
+<!--        const selectedValue = sortSelect.value;-->
+<!--        const currentUrl = new URL(window.location.href);-->
+<!--        currentUrl.searchParams.set('sort_order', selectedValue);-->
+<!--        window.location.href = currentUrl.href;-->
+<!--    });-->
+<!--</script>-->
 
 
 

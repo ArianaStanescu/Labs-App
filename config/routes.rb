@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :users do
     resources :credit_cards
     resources :addresses
+    resources :orders
   end
 
 
