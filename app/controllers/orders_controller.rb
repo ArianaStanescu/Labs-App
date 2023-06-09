@@ -59,6 +59,10 @@ class OrdersController < ApplicationController
     # @order.tracking_number = generate_tracking_number
     respond_to do |format|
       if @order.save
+        wish_list_item = current_user.wish_list_items.find_by(product_id: params[:order][:product_id])
+        if wish_list_item.present?
+          wish_list_item.destroy
+        end
         product = @order.product
         product.update(stock: product.stock - 1)
         format.html { redirect_to order_url(@order), notice: "Order was successfully created." }

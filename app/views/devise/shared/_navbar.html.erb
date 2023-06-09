@@ -85,6 +85,12 @@
         </li>
 
         <li class="nav-item">
+          <% if current_user.present? %>
+            <%= link_to "Wish List", wish_list_items_path, class: "nav-link" %>
+          <%end %>
+        </li>
+
+        <li class="nav-item">
           <% if current_user.present?  && current_user.role == "client" %>
             <%= link_to "My Orders", user_orders_path(current_user), class: "nav-link" %>
           <%end %>

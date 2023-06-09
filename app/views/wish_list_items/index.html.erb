@@ -1,0 +1,107 @@
+<!--<p style="color: green"><%#= notice %></p>-->
+
+<!--<h1>Wish list items</h1>-->
+
+<!--<div id="wish_list_items">-->
+  <%# @wish_list_items.each do |wish_list_item| %>
+    <%#= render wish_list_item %>
+<!--    <p>-->
+      <%#= link_to "Show this wish list item", wish_list_item %>
+<!--    </p>-->
+  <%# end %>
+<!--</div>-->
+
+<%#= link_to "New wish list item", new_wish_list_item_path %>
+
+<div class="container mt-5" style="font-family: Verdana">
+  <h2 style="font-family: Lucida Handwriting; text-align: center">Wish List</h2>
+
+  <%# product_count = @products.count %>
+  <!--  <p style="font-family: Verdana; "> <%#= product_count %> Products</p>-->
+
+  <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
+  <% @wish_list_items.each do |wish_list_item| %>
+    <div id="products" class="card" style="width: 20rem; align-items: center; margin: 0 auto; background-color: #e6f2ff">
+      <div style="position: relative; background-color: #888888">
+        <% if wish_list_item.product.stock == 0 %>
+          <%= image_tag wish_list_item.product.image.present? ? wish_list_item.product.image : "gift.png", style: "width: 20rem; opacity: 0.6;" %>
+
+
+        <% else %>
+          <%= image_tag wish_list_item.product.image.present? ? wish_list_item.product.image : "gift.png", style: "width: 20rem" %>
+        <% end %>
+        <a href="<%= product_path(wish_list_item.product) %>" class="btn btn-primary image-btn" style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">View Details</a>
+      </div>
+      <div class="card-body" style="text-align: center; align-items: center">
+        <h5 class="card-title" style="font-size: large"><%= wish_list_item.product.name %></h5>
+        <p class="card-text">Metal: <%= wish_list_item.product.metal %> </p>
+        <p class="card-text"> Size: <%= wish_list_item.product.size %> </p>
+        <p class="card-text">Price: <%= wish_list_item.product.price %>$</p>
+        <div class="mt-auto">
+          <% if current_user.present? && wish_list_item.product.stock > 0 %>
+            <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: wish_list_item.product.id }), data: {method: :post}, class: "btn btn-primary" %>
+          <% elsif wish_list_item.product.stock == 0%>
+            <p class="text-muted mb-0" style="color:#82adff"> This item is out of stock!</p>
+          <% end %>
+          <br>
+          <%= button_to 'Delete', wish_list_item, method: :delete, form:
+            { data: { turbo: true, turbo_confirm: 'Are you sure?' } } %>
+        </div>
+      </div>
+      <br>
+    </div>
+
+  <% end %>
+  </div>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--  <table class="table table-info table-striped table-hover table-sm">-->
+<!--    <thead>-->
+<!--    <tr style="background-color: #e6f2ff">-->
+<!--      <th scope="col">No</th>-->
+<!--      <th scope="col">Name</th>-->
+<!--      <th scope="col">Metal</th>-->
+<!--      <th scope="col">Size</th>-->
+<!--      <th scope="col">Price</th>-->
+<!--      <th scope="col">Category</th>-->
+<!--      <th scope="col">Action</th>-->
+
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+    <%# @products.each do |product| %>
+    <%# @wish_list_items.each.with_index(1) do |wish_list_item, index| %>
+<!--      <tr>-->
+<!--        <td><%#= index %></td>-->
+<!--        <td><%#= wish_list_item.product.name %></td>-->
+<!--        <td><%#= wish_list_item.product.metal %></td>-->
+<!--        <td><%#= wish_list_item.product.size %></td>-->
+<!--        <td><%#= wish_list_item.product.price %></td>-->
+<!--        <td><%#= wish_list_item.product.category.name %></td>-->
+
+
+<!--      </tr>-->
+    <%# end %>
+
+<!--    </tbody>-->
+<!--  </table>-->
+  <!--  <div class="text-right">-->
+  <%#= will_paginate @products, previous_label: '← Previous', next_label: 'Next →', class: 'pagination justify-content-end' %>
+
+  <!--  </div>-->
+
+</div>
+
+

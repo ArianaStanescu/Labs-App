@@ -18,6 +18,9 @@ class ProductsController < ApplicationController
 
   # GET /products/1 or /products/1.json
   def show
+    if current_user.present?
+      @wish_list_items = WishListItem.where(user_id: current_user.id)
+    end
   end
 
   # GET /products/new
