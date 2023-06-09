@@ -25,11 +25,11 @@
     <%#= javascript_include_tag 'https://code.jquery.com/jquery-3.6.0.min.js' %>
 
 
-    <% if flash[:alert] %>
-      <div class="alert alert-danger">
-        <%= flash[:alert] %>
-      </div>
-    <% end %>
+    <%# if flash[:alert] %>
+<!--      <div class="alert alert-danger">-->
+        <%#= flash[:alert] %>
+<!--      </div>-->
+    <%# end %>
 
 
   </head>
@@ -38,6 +38,18 @@
     <%= render "devise/shared/navbar" %>
 
     <%= stylesheet_link_tag "navbars" %>
+
+    <% if flash[:alert] %>
+    <div class="alert alert-danger" style="text-align: center">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+    <% if flash[:notice].present? %>
+      <div class="alert alert-success" style="text-align: center">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
 
     <%= yield %>
 

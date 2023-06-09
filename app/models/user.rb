@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :addresses
   accepts_nested_attributes_for :credit_cards
   validates :phone, presence: true, length: { is: 10 }
+
+  def admin?
+    self.role == "admin"
+  end
 end

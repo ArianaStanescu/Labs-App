@@ -15,7 +15,7 @@
           <p class="card-text"><%= @product.description %></p>
           <p class="card-text">Metal: <%= @product.metal %> </p>
           <p class="card-text"> Size: <%= @product.size %> </p>
-          <p class="card-text">Price: <%= @product.price %> | Stock: <%= @product.stock %></p>
+          <p class="card-text">Price: <%= @product.price %>$ | Stock: <%= @product.stock %></p>
           <br>
 
           <% if current_user.present? && current_user.role == "admin" && @product.stock > 0 %>

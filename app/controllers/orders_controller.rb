@@ -6,14 +6,23 @@ class OrdersController < ApplicationController
   require 'securerandom'
   # GET /orders or /orders.json
   def index
-    # @orders = Order.includes(:product, :user).all
-    @user = current_user
-    if @user.role == "client"
-      @orders = @user.orders
-    else
-      @orders = Order.includes(:product, :user).all
+    orders = Order.includes(:product, :user).all
+    unless current_user.admin?
+      orders = orders.where(user_id: current_user.id)
     end
-    @pagy, @orders = pagy(@orders)
+    @user = current_user
+    @pagy, @orders = pagy(orders)
+
+
+
+    # @orders = Order.includes(:product, :user).all
+    # @user = current_user
+    # if @user.role == "client"
+    #   @orders = @user.orders
+    # else
+    #   @orders = Order.includes(:product, :user).all
+    # end
+    # @pagy, @orders = pagy(@orders)
   end
 
   # GET /orders/1 or /orders/1.json
@@ -28,6 +37,10 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @user = current_user
+    if @user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized."
+    end
   end
 
   # GET /orders/1/edit
@@ -59,6 +72,9 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
+    if current_user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized."
+    end
     respond_to do |format|
       # if @order.update(order_params)
       #   format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
@@ -76,6 +92,9 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
+    if current_user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized."
+    end
     @order.destroy
 
     respond_to do |format|
