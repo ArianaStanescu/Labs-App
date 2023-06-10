@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <%= wicked_pdf_stylesheet_link_tag 'application' %>
+  <style>
+      .invoice-table {
+          width: 100%;
+          border-collapse: collapse;
+      }
+
+      .invoice-table th,
+      .invoice-table td {
+          border: 1px solid black;
+          padding: 8px;
+      }
+
+      .invoice-total {
+          font-weight: bold;
+      }
+
+      .company-logo {
+          max-width: 500px;
+      }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1 class="text-center mb-4">Invoice for order #<%= @order.id %></h1>
+  <table class="invoice-table">
+    <thead>
+    <tr>
+      <th>Product Name</th>
+<!--      <th>Designer</th>-->
+      <th>Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><%= @product.name %></td>
+      <td><%= @product.price %></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="2" class="text-right invoice-total">Total:</td>
+      <td class="invoice-total"><%= @product.price %></td>
+    </tr>
+    </tfoot>
+  </table>
+  <br>
+  <div class="text-center mb-4">
+    <%= image_tag @product.image, class: 'company-logo' %>
+  </div>
+</div>
+</body>
+</html>

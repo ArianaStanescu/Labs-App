@@ -1,0 +1,15 @@
+<%= form_tag orders_path, method: :get, class: 'form-inline', id: 'orders-form' do %>
+  <%= label_tag :category_id, 'Category:' %>
+  <%= select_tag :category_id, options_for_select(Category.all.pluck(:name, :id), params[:category_id]), prompt: 'All'%>
+
+  <%= label_tag :metal, 'Metal:' %>
+  <%= select_tag :metal, options_for_select(Product.distinct.pluck(:metal).sort, params[:metal]), prompt: 'All'%>
+
+  <%= label_tag :status, 'Status:' %>
+  <%= select_tag :status, options_for_select(Order.distinct.pluck(:status).sort, params[:status]), prompt: 'All' %>
+
+  <%= text_field_tag(:search, params[:search]) %>
+
+  <%= submit_tag 'Filter', class: 'btn btn-primary mb-2' %>
+
+<% end %>

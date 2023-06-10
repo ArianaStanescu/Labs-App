@@ -1,19 +1,32 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  # before_action :check_admin, except: [:show, :create]
+  before_action :check_admin, except: [:show, :create, :index]
   before_action :set_order, only: %i[ show edit update destroy ]
   include Pagy::Backend
   require 'securerandom'
   # GET /orders or /orders.json
   def index
-    # @orders = Order.includes(:product, :user).all
     @user = current_user
-    if @user.role == "client"
-      @orders = @user.orders
-    else
-      @orders = Order.includes(:product, :user).all
+    orders = Order.includes(:product, :user).all
+    unless current_user.admin?
+      orders = orders.where(user_id: current_user.id)
     end
-    @pagy, @orders = pagy(@orders)
+    orders = orders.joins(:product).where(products: { category_id: params[:category_id] }) if params[:category_id].present?
+    orders = orders.joins(:product).where(products: { metal: params[:metal] }) if params[:metal].present?
+    orders = orders.joins(:product).where("products.name LIKE ?", "%#{params[:search]}%") if params[:search].present?
+    orders = orders.where(status: params[:status]) if params[:status].present?
+    @pagy, @orders = pagy(orders)
+
+
+
+    # @orders = Order.includes(:product, :user).all
+    # @user = current_user
+    # if @user.role == "client"
+    #   @orders = @user.orders
+    # else
+    #   @orders = Order.includes(:product, :user).all
+    # end
+    # @pagy, @orders = pagy(@orders)
   end
 
   # GET /orders/1 or /orders/1.json
@@ -28,6 +41,10 @@ class OrdersController < ApplicationController
   # GET /orders/new
   def new
     @order = Order.new
+    @user = current_user
+    if @user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized."
+    end
   end
 
   # GET /orders/1/edit
@@ -43,11 +60,15 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-    # @order.tracking_number = generate_tracking_number
     respond_to do |format|
       if @order.save
+        wish_list_item = current_user.wish_list_items.find_by(product_id: params[:order][:product_id])
+        if wish_list_item.present?
+          wish_list_item.destroy
+        end
         product = @order.product
         product.update(stock: product.stock - 1)
+        OrderMailer.send_email(current_user, @order).deliver_now
         format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @order }
       else
@@ -59,6 +80,9 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
+    if current_user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized."
+    end
     respond_to do |format|
       # if @order.update(order_params)
       #   format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
@@ -76,6 +100,9 @@ class OrdersController < ApplicationController
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
+    if current_user.role != 'admin'
+      redirect_to root_path, alert: "You are not authorized."
+    end
     @order.destroy
 
     respond_to do |format|

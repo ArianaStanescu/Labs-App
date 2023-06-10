@@ -4,8 +4,12 @@ class CreditCardsController < ApplicationController
 
   # GET /credit_cards or /credit_cards.json
   def index
+    # @user = current_user
+    # @credit_cards = @user.credit_cards
+
+    credit_cards = CreditCard.includes(:user).all
+    @credit_cards = credit_cards.where(user_id: current_user.id)
     @user = current_user
-    @credit_cards = @user.credit_cards
   end
 
   # GET /credit_cards/1 or /credit_cards/1.json
