@@ -12,12 +12,12 @@
     <div class="form-group mr-2">
       <label for="sort_order" class="mr-2">Sort: </label>
       <div>
-
+        <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),
+                       class: "form-control", style: "width: 180px", id: "sort-select") %>
       </div>
     </div>
   <% end %>
   <br>
-  <%#= render 'order_menu' %>
   <%= render "filter_menu" %>
 
   <div class="ml-auto", style="text-align: right">
@@ -59,7 +59,7 @@
                 <br>
                 <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
               <% elsif product.stock == 0%>
-                  <p class="text-muted mb-0" style="color:#82adff"> This item is out of stock!</p>
+                  <p class="text-muted mb-0" style="color:#ff66cc"> This item is out of stock!</p>
                 <% else %>
                 <p class="text-muted mb-0" style="color:#82adff"> You need to be logged in to order!</p>
               <% end %>

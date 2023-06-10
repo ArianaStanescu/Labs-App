@@ -23,7 +23,7 @@ class HomeController < ApplicationController
     products = products.where(metal: params[:metal]) if params[:metal].present?
     products = products.where("name LIKE ? ", "%#{params[:search]}%") if params[:search].present?
     # products = products.order(:name)
-    products = products.order(:price)
+    products = products.order(price: :asc)
     @pagy, @products = pagy(products, items:15)
 
     # if params[:sort_order].present?

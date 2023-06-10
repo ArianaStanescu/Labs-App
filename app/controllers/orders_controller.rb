@@ -14,6 +14,7 @@ class OrdersController < ApplicationController
     orders = orders.joins(:product).where(products: { category_id: params[:category_id] }) if params[:category_id].present?
     orders = orders.joins(:product).where(products: { metal: params[:metal] }) if params[:metal].present?
     orders = orders.joins(:product).where("products.name LIKE ?", "%#{params[:search]}%") if params[:search].present?
+    orders = orders.where(status: params[:status]) if params[:status].present?
     @pagy, @orders = pagy(orders)
 
 
@@ -67,6 +68,7 @@ class OrdersController < ApplicationController
         end
         product = @order.product
         product.update(stock: product.stock - 1)
+        OrderMailer.send_email(current_user, @order).deliver_now
         format.html { redirect_to order_url(@order), notice: "Order was successfully created." }
         format.json { render :show, status: :created, location: @order }
       else
