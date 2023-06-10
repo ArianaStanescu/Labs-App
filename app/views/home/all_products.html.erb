@@ -36,6 +36,7 @@
           <% else %>
               <%= image_tag product.image.present? ? product.image : "gift.png", style: "width: 20rem" %>
             <% end %>
+
             <a href="<%= product_path(product) %>" class="btn btn-primary image-btn" style="position: absolute; top: 90%; left: 50%; transform: translate(-50%, -50%);">View Details</a>
           </div>
           <div class="card-body" style="text-align: center; align-items: center">
@@ -51,7 +52,10 @@
                 <p class="text-muted mb-0" style="color:#82adff">This item is already in the wish list!</p>
                 <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
               <% elsif current_user.present? && product.stock > 0%>
-                <%= button_to 'Add to Wish List', wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
+                <%#= button_to 'Add to Wish List', wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary-2" %>
+                <%= button_to wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: product.id }), method: :post, class: "btn btn-primary-2" do %>
+                  <i class="fa fa-heart" aria-hidden="true"></i>
+                <% end %>
                 <br>
                 <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
               <% elsif product.stock == 0%>

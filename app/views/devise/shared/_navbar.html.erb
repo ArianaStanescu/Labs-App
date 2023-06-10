@@ -84,9 +84,17 @@
           <%end %>
         </li>
 
+<!--        <li class="nav-item">-->
+          <%# if current_user.present? %>
+            <%#= link_to "Wish List", wish_list_items_path, class: "nav-link" %>
+          <%#end %>
+<!--        </li>-->
+
         <li class="nav-item">
           <% if current_user.present? %>
-            <%= link_to "Wish List", wish_list_items_path, class: "nav-link" %>
+            <%= link_to wish_list_items_path, class: "nav-link" do %>
+              <i class="fa fa-heart" aria-hidden="true"></i>
+              <% end %>
           <%end %>
         </li>
 

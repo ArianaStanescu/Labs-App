@@ -1,16 +1,19 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  # before_action :check_admin, except: [:show, :create]
+  before_action :check_admin, except: [:show, :create, :index]
   before_action :set_order, only: %i[ show edit update destroy ]
   include Pagy::Backend
   require 'securerandom'
   # GET /orders or /orders.json
   def index
+    @user = current_user
     orders = Order.includes(:product, :user).all
     unless current_user.admin?
       orders = orders.where(user_id: current_user.id)
     end
-    @user = current_user
+    orders = orders.joins(:product).where(products: { category_id: params[:category_id] }) if params[:category_id].present?
+    orders = orders.joins(:product).where(products: { metal: params[:metal] }) if params[:metal].present?
+    orders = orders.joins(:product).where("products.name LIKE ?", "%#{params[:search]}%") if params[:search].present?
     @pagy, @orders = pagy(orders)
 
 
@@ -56,7 +59,6 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
-    # @order.tracking_number = generate_tracking_number
     respond_to do |format|
       if @order.save
         wish_list_item = current_user.wish_list_items.find_by(product_id: params[:order][:product_id])
