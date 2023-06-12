@@ -8,6 +8,14 @@ class OrderMailer < ApplicationMailer
     attachments['invoice.pdf'] = generate_pdf_invoice
     mail(to: user.email, subject: 'Order Placed!')
   end
+
+  def send_shipped_email(user, order)
+    @product = order.product
+    @order = order
+    if order.status == 'shipped'
+      mail(to: order.user.email, subject: 'Order Shipped!')
+    end
+  end
   private
 
   def generate_pdf_invoice

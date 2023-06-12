@@ -93,6 +93,7 @@ class OrdersController < ApplicationController
       #   format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
       #   format.json { render :show, status: :ok, location: @order } order_params.present? &&
       if  @order.update(tracking_number:  generate_tracking_number, status: :shipped)
+        OrderMailer.send_shipped_email(current_user, @order).deliver_now
         # @order.tracking_number = generate_tracking_number
               format.html { redirect_to order_url(@order), notice: "Order was successfully shipped." }
               format.json { render :show, status: :ok, location: @order }
