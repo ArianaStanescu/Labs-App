@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :addresses
     resources :orders
   end
-
+  get 'generate_csv', to: 'orders#generate_csv', as: 'generate_csv'
 
 
 end

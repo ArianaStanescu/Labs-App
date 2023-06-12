@@ -60,7 +60,14 @@
     <%#= will_paginate @products, previous_label: '← Previous', next_label: 'Next →', class: 'pagination justify-content-end' %>
 
 <!--  </div>-->
-  <%== pagy_nav(@pagy) %>
+  <div class="pagy-container">
+    <div class="pagy-info">
+    </div>
+
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  </div>
 
 </div>
 

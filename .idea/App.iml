@@ -50,6 +50,7 @@
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.39.0, ruby-3.2.2-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.2.2, ruby-3.2.2-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, ruby-3.2.2-p53) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="csv (v3.2.6, ruby-3.2.2-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.7.2, ruby-3.2.2-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v4.9.2, ruby-3.2.2-p53) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.12.0, ruby-3.2.2-p53) [gem]" level="application" />
@@ -169,6 +170,7 @@
         <option value="test_unit:install" />
         <option value="test_unit:mailbox" />
         <option value="test_unit:plugin" />
+        <option value="wicked_pdf" />
       </list>
     </option>
     <option name="myGenerators">
@@ -209,6 +211,7 @@
         <option value="test_unit:install" />
         <option value="test_unit:mailbox" />
         <option value="test_unit:plugin" />
+        <option value="wicked_pdf" />
       </list>
     </option>
   </component>
@@ -463,6 +466,7 @@
                   <RakeTaskImpl description="" fullCommand="tmp:cache:clear" id="clear" />
                 </subtasks>
               </RakeTaskImpl>
+              <RakeTaskImpl description="" fullCommand="tmp:letter_opener" id="letter_opener" />
               <RakeTaskImpl id="pids">
                 <subtasks>
                   <RakeTaskImpl description="" fullCommand="tmp:pids:clear" id="clear" />

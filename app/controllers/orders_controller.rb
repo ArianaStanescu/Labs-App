@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
   include Pagy::Backend
   require 'securerandom'
+  require "csv"
   # GET /orders or /orders.json
   def index
     @user = current_user
@@ -117,6 +118,17 @@ class OrdersController < ApplicationController
     end
   end
 
+  def generate_csv
+    @orders = Order.all
+    csv_data = CSV.generate do |csv|
+      csv << ["Order ID", "User Email", "Product Name", "Quantity", "Tracking Number"]
+      @orders.each do |order|
+        csv << [order.id, order.user.email, order.product.name, order.quantity, order.tracking_number]
+      end
+    end
+    send_data csv_data, filename: "orders.csv"
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_order
@@ -141,6 +153,7 @@ class OrdersController < ApplicationController
     tracking_number
     # render json: { tracking_number: tracking_number }
   end
+
 
 
 end
