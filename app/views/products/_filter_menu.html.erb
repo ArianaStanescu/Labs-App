@@ -5,7 +5,13 @@
   <%= label_tag :metal, 'Metal:' %>
   <%= select_tag :metal, options_for_select(Product.distinct.pluck(:metal).sort, params[:metal]), prompt: 'All'%>
 
-  <%= text_field_tag(:search, params[:search]) %>
+  <%= label_tag :metal, 'Sort by price:' %>
+  <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]), prompt: '-', id: "sort-select") %>
+
+  <%= label_tag :metal, 'Sort by stock:' %>
+  <%= select_tag(:stock_order, options_for_select([['Asc', 'asc'], ['Desc', 'desc']], params[:stock_order]), prompt: '-', id: "stock-select") %>
+
+  <%= text_field_tag :search, params[:search], placeholder: 'Search item', style:"width:120px" %>
 
   <%= submit_tag 'Filter', class: 'btn btn-primary mb-2' %>
 

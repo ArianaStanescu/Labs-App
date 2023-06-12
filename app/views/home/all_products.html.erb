@@ -4,27 +4,33 @@
     <h1 class="image-text" style="font-family: Lucida Handwriting">All Products</h1>
   </div>
 
+  <br>
+  <br>
+
 <br>
 
-<% product_count = @products.count %>
-<p style="font-family: Verdana; "> <%= product_count %> Products</p>
-  <%= form_tag(all_products_path, method: 'get', id: "sort-form", class: "form-inline") do %>
-    <div class="form-group mr-2">
-      <label for="sort_order" class="mr-2">Sort: </label>
-      <div>
-        <%= select_tag(:sort_order, options_for_select([['Price Low To High', 'asc'], ['Price High To Low', 'desc']], params[:sort_order]),
-                       class: "form-control", style: "width: 180px", id: "sort-select") %>
-      </div>
-    </div>
-  <% end %>
-  <br>
-  <%= render "filter_menu" %>
-
-  <div class="ml-auto", style="text-align: right">
+  <div class="ml-auto", style="text-align: left">
     <%= link_to "Size Guide", "#bottom-section", class: "text-right scroll-link" %>
   </div>
 
-  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  <%= render "filter_menu" %>
+  <%#== pagy_info(@pagy) %>
+
+  <%#== pagy_nav(@pagy) if @pagy.pages > 1 %>
+
+  <br>
+  <div class="pagy-container">
+    <div class="pagy-info">
+      <%== pagy_info(@pagy) %>
+    </div>
+
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  </div>
+
+
+
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
         <div id="products" class="card" style="width: 20rem; align-items: center; margin: 0 auto; background-color: #e6f2ff">
@@ -50,8 +56,10 @@
               <%# end %>
               <% if current_user.present? && @wish_list_items.any? { |wish_list_item| wish_list_item.product_id == product.id } %>
                 <p class="text-muted mb-0" style="color:#82adff">This item is already in the wish list!</p>
-                <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
-              <% elsif current_user.present? && product.stock > 0%>
+                <%#= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
+                <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: { turbo: true, turbo_confirm: 'Are you sure?' }, method: :post, class: "btn btn-primary" %>
+
+            <% elsif current_user.present? && product.stock > 0%>
                 <%#= button_to 'Add to Wish List', wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary-2" %>
                 <%= button_to wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: product.id }), method: :post, class: "btn btn-primary-2" do %>
                   <i class="fa fa-heart" aria-hidden="true"></i>
@@ -71,13 +79,22 @@
       <% end %>
 
   </div>
-  <%== pagy_nav(@pagy) %>
-</div>
+
+  <div class="pagy-container">
+    <div class="pagy-info">
+    </div>
+
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  </div>
+
   <div id="bottom-section" style="display: flex; justify-content: center; align-items: center;">
     <%= image_tag "rings_size_guide1.png", style: "width: 35rem" %>
     <%= image_tag "rings_size_guide2.png", style: "width: 35rem" %>
   </div>
 </div>
+
 
 <br>
 

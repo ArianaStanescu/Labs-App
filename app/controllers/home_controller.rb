@@ -16,14 +16,17 @@ class HomeController < ApplicationController
       @wish_list_items = WishListItem.where(user_id: current_user.id)
     end
     products= Product.includes(image_attachment: :blob)
-      # products = Product.includes(image_attachment: :blob)
 
 
     products = products.where(category_id: params[:category_id]) if params[:category_id].present?
     products = products.where(metal: params[:metal]) if params[:metal].present?
     products = products.where("name LIKE ? ", "%#{params[:search]}%") if params[:search].present?
-    # products = products.order(:name)
-    products = products.order(price: :asc)
+    if params[:sort_order] == 'asc'
+      products = products.order(price: :asc)
+    elsif params[:sort_order] == 'desc'
+      products = products.order(price: :desc)
+    end
+    products = products.order(:name)
     @pagy, @products = pagy(products, items:15)
 
     # if params[:sort_order].present?

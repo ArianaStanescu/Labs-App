@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[ show edit update destroy ]
   include Pagy::Backend
   require 'securerandom'
+  require "csv"
   # GET /orders or /orders.json
   def index
     @user = current_user
@@ -15,6 +16,11 @@ class OrdersController < ApplicationController
     orders = orders.joins(:product).where(products: { metal: params[:metal] }) if params[:metal].present?
     orders = orders.joins(:product).where("products.name LIKE ?", "%#{params[:search]}%") if params[:search].present?
     orders = orders.where(status: params[:status]) if params[:status].present?
+    if params[:sort_by] == 'asc'
+      orders = orders.order(created_at: :asc)
+    elsif params[:sort_by] == 'desc'
+      orders = orders.order(created_at: :desc)
+    end
     @pagy, @orders = pagy(orders)
 
 
@@ -88,6 +94,7 @@ class OrdersController < ApplicationController
       #   format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
       #   format.json { render :show, status: :ok, location: @order } order_params.present? &&
       if  @order.update(tracking_number:  generate_tracking_number, status: :shipped)
+        OrderMailer.send_shipped_email(current_user, @order).deliver_now
         # @order.tracking_number = generate_tracking_number
               format.html { redirect_to order_url(@order), notice: "Order was successfully shipped." }
               format.json { render :show, status: :ok, location: @order }
@@ -109,6 +116,17 @@ class OrdersController < ApplicationController
       format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def generate_csv
+    @orders = Order.all
+    csv_data = CSV.generate do |csv|
+      csv << ["Order ID", "User Email", "Product Name", "Quantity", "Tracking Number"]
+      @orders.each do |order|
+        csv << [order.id, order.user.email, order.product.name, order.quantity, order.tracking_number]
+      end
+    end
+    send_data csv_data, filename: "orders.csv"
   end
 
   private
@@ -135,6 +153,7 @@ class OrdersController < ApplicationController
     tracking_number
     # render json: { tracking_number: tracking_number }
   end
+
 
 
 end

@@ -8,8 +8,11 @@
   <%= label_tag :status, 'Status:' %>
   <%= select_tag :status, options_for_select(Order.distinct.pluck(:status).sort, params[:status]), prompt: 'All' %>
 
-  <%= text_field_tag(:search, params[:search]) %>
+  <%= label_tag :sort_by, 'Sort by date:' %>
+  <%= select_tag :sort_by, options_for_select({ 'Newest' => 'desc', 'Oldest' => 'asc'}, params[:sort_by]), prompt: 'None' %>
 
+  <%#= text_field_tag(:search, params[:search]) %>
+  <%= text_field_tag :search, params[:search], placeholder: 'Search item', style:"width:120px" %>
   <%= submit_tag 'Filter', class: 'btn btn-primary mb-2' %>
 
 <% end %>

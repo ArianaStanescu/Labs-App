@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin, except: [:show]
+  include Pagy::Backend
   def index
-    @users = User.all
+    users = User.all
+    @pagy, @users = pagy(users)
   end
   # def new
   # end

@@ -33,8 +33,10 @@
           <% if current_user.present? && @wish_list_items.any? { |wish_list_item| wish_list_item.product_id == @product.id }%>
               <p class="text-muted mb-0" style="color:#82adff">This item is already in the wish list!</p>
             <% elsif @product.stock > 0 %>
-              <%= button_to 'Add to Wish List', wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: @product.id }), data: {method: :post}, class: "btn btn-primary-2" %>
+              <%= button_to wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: @product.id }), method: :post, class: "btn btn-primary-2" do %>
+              <i class="fa fa-heart" aria-hidden="true"></i>
             <% end %>
+          <% end %>
           <br>
           <% if current_user.present? && current_user.role == "client" && @product.stock > 0 %>
             <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: @product.id }), data: {method: :post}, class: "btn btn-primary" %>
@@ -58,46 +60,3 @@
 <br>
 
 
-<!--<div class="card" style="width: 30rem; font-family: Verdana; margin: 0 auto; background-color: #e6f2ff">-->
-
-  <%#= image_tag @product.product_image + ".jpg", style:"width: 30rem" %>
-
-<!--  <div class="card-body" style="text-align: center; align-items: center">-->
-<!--    <h5 class="card-title" style="font-size: large"><%#= @product.name %></h5>-->
-<!--    <p class="card-text"><%#= @product.description %></p>-->
-<!--    <p class="card-text">Metal: <%#= @product.metal %> </p>-->
-<!--    <p class="card-text"> Size: <%#= @product.size %> </p>-->
-<!--    <p class="card-text">Price: <%#= @product.price %> | Stock: <%#= @product.stock %></p>-->
-
-    <%# if current_user.present? %>
-      <%#= link_to 'Back', products_path, class: "btn btn-primary" %>
-    <%#end %>
-    <%# if current_user.present? %>
-      <%#= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
-    <%#end %>
-
-    <%# if current_user.present? == blank? %>
-      <%#= link_to 'Back', all_products_path, class: "btn btn-primary" %>
-    <%#end %>
-    <%# if current_user.present? == blank? %>
-      <%#= link_to 'Add To Cart', all_products_path, class: "btn btn-primary" %>
-    <%#end %>
-    <%#= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
-<!--    <br>-->
-<!--  </div>-->
-<!--  <br>-->
-<!--</div>-->
-<!--<br>-->
-
-
-
-<!--<p style="color: green"><%#= notice %></p>-->
-
-<%#= render @product %>
-
-<!--<div>-->
-<!--  <%#= link_to "Edit this product", edit_product_path(@product) %> |-->
-  <%#= link_to "Back to products", products_path %>
-
-  <%#= button_to "Destroy this product", @product, method: :delete %>
-<!--</div>-->

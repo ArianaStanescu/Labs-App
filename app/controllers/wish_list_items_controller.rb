@@ -29,7 +29,7 @@ class WishListItemsController < ApplicationController
     respond_to do |format|
       if @wish_list_item.save
         # format.html { redirect_to wish_list_item_url(@wish_list_item), notice: "Item was successfully added to wish list." }
-        format.html { redirect_to wish_list_items_path, notice: "Item was successfully added to wish list." }
+        format.html { redirect_to wish_list_items_path, notice: "Item was successfully added to the wish list." }
         format.json { render :show, status: :created, location: @wish_list_item }
       else
         format.html { render :new, status: :unprocessable_entity }

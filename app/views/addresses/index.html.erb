@@ -42,7 +42,7 @@
         <td><%= address.address_type %></td>
         <td><%= link_to 'Show', address %> | <%= link_to 'Edit', edit_address_path(address) %> |
           <%= button_to 'Destroy', address, method: :delete, form:
-            { data: { turbo: true, turbo_confirm: 'Are you sure?' } } %></td>
+            { data: { turbo: true, turbo_confirm: 'Are you sure?' } }, class: "btn-delete-index"  %></td>
       </tr>
       <%# end %>
     <%end %>

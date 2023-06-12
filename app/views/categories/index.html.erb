@@ -29,7 +29,7 @@
 <!--        <td><%#= link_to 'Show', category %> | <%#= link_to 'Edit', edit_category_path(category) %> | <%#= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>-->
         <td><%= link_to 'Show', category %> | <%= link_to 'Edit', edit_category_path(category) %> |
           <%= button_to 'Destroy', category, method: :delete, form:
-            { data: { turbo: true, turbo_confirm: 'Are you sure?' } }%></td>
+            { data: { turbo: true, turbo_confirm: 'Are you sure?' } } , class: "btn-delete-index"%></td>
 
       </tr>
     <% end %>
