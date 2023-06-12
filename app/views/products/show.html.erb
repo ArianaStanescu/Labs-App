@@ -29,7 +29,7 @@
             <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
           <%end %>
 
-          <br>
+          <br><br>
           <% if current_user.present? && @wish_list_items.any? { |wish_list_item| wish_list_item.product_id == @product.id }%>
               <p class="text-muted mb-0" style="color:#82adff">This item is already in the wish list!</p>
             <% elsif @product.stock > 0 %>
