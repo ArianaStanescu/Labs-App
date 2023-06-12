@@ -18,7 +18,15 @@
   <br><br>
   <%= render 'filter_menu' %>
 
-  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+  <div class="pagy-container">
+    <div class="pagy-info">
+      <%== pagy_info(@pagy) %>
+    </div>
+
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  </div>
   <table class="table table-info table-striped table-hover table-sm">
     <thead>
     <tr style="background-color: #e6f2ff">
@@ -48,7 +56,7 @@
             | <%= link_to 'Ship Now', edit_order_path(order) %> |
 
           <%= button_to 'Destroy', order, method: :delete, form:
-            { data: { turbo: true, turbo_confirm: 'Are you sure?' } } %></td>
+            { data: { turbo: true, turbo_confirm: 'Are you sure?' } }, class: "btn-delete-index" %></td>
             <% end %>
           <% end %>
       </tr>

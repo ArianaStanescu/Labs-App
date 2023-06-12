@@ -31,4 +31,8 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
+.pagy-container {
+  display: flex;
+  justify-content: space-between;
+}
 

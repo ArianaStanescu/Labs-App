@@ -15,6 +15,11 @@ class OrdersController < ApplicationController
     orders = orders.joins(:product).where(products: { metal: params[:metal] }) if params[:metal].present?
     orders = orders.joins(:product).where("products.name LIKE ?", "%#{params[:search]}%") if params[:search].present?
     orders = orders.where(status: params[:status]) if params[:status].present?
+    if params[:sort_by] == 'asc'
+      orders = orders.order(created_at: :asc)
+    elsif params[:sort_by] == 'desc'
+      orders = orders.order(created_at: :desc)
+    end
     @pagy, @orders = pagy(orders)
 
 

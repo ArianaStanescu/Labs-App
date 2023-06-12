@@ -10,6 +10,17 @@ class ProductsController < ApplicationController
     products = products.where(category_id: params[:category_id]) if params[:category_id].present?
     products = products.where(metal: params[:metal]) if params[:metal].present?
     products = products.where("name LIKE ? OR description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
+    if params[:sort_order] == 'asc'
+      products = products.order(price: :asc)
+    elsif params[:sort_order] == 'desc'
+      products = products.order(price: :desc)
+    end
+
+    if params[:stock_order] == 'asc'
+      products = products.order(stock: :asc)
+    elsif params[:stock_order] == 'desc'
+      products = products.order(stock: :desc)
+    end
     products = products.order(:name)
     # @products = Product.includes(:category).order(:size).all
     @pagy, @products = pagy(products)
