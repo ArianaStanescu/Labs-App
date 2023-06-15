@@ -37,6 +37,9 @@ Rails.application.routes.draw do
     resources :orders
   end
   get 'generate_csv', to: 'orders#generate_csv', as: 'generate_csv'
+  # get 'generate_pdf_invoice', to: 'orders#generate_pdf_invoice', as: 'generate_pdf_invoice'
+  # get 'generate_pdf', to: 'orders#generate_pdf', as: 'generate_pdf'
+
 
 
 end

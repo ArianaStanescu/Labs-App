@@ -5,6 +5,8 @@ class OrdersController < ApplicationController
   include Pagy::Backend
   require 'securerandom'
   require "csv"
+  require 'wicked_pdf'
+
   # GET /orders or /orders.json
   def index
     @user = current_user
@@ -42,6 +44,7 @@ class OrdersController < ApplicationController
     if @order.user_id != current_user.id && current_user.role != 'admin'
       redirect_to root_path, alert: "You are not authorized to show this order."
     end
+
   end
 
   # GET /orders/new
@@ -128,6 +131,33 @@ class OrdersController < ApplicationController
     end
     send_data csv_data, filename: "orders.csv"
   end
+
+  # def generate_pdf_invoice
+  #   @user = current_user
+  #   @order = Order.find(params[:id])
+  #   @product = @order.product
+  #   pdf = WickedPdf.new.pdf_from_string(
+  #     render_to_string(
+  #       # template: Rails.root.join('order_mailer', 'invoice_pdf.html.erb').to_s
+  #       template: 'order_mailer/invoice_pdf'.to_s
+  #     )
+  #   )
+  #   # pdf
+  #   send_data pdf, filename: 'invoice.pdf', type: 'application/pdf', disposition: 'inline'
+  # end
+
+  # def generate_pdf
+  #   @user = current_user
+  #   @order = Order.find(params[:id])
+  #
+  #   respond_to do |format|
+  #     format.pdf do
+  #       pdf = WickedPdf.new.pdf_from_string(render_to_string(template: 'orders/generate_pdf'))
+  #       send_data pdf, filename: "orders.pdf", type: "application/pdf", disposition: "inline"
+  #     end
+  #   end
+  # end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

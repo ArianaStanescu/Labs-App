@@ -17,7 +17,7 @@
   <h2 style="font-family: Lucida Handwriting; text-align: center">Orders</h2>
   <br><br>
   <% if current_user.admin? %>
-   <%= link_to 'Generate CSV', generate_csv_path, class: 'btn btn-primary' %>
+   <%= link_to 'Export CSV', generate_csv_path, class: 'btn btn-primary' %>
   <% end %>
 
   <%= render 'filter_menu' %>
@@ -54,10 +54,10 @@
         <td><%= order.status %></td>
         <td><%= order.tracking_number %></td>
 <!--        <td><%#= link_to 'Show', order %> | <%#= link_to 'Edit', edit_order_path(order) %> | <%#= link_to 'Destroy', order, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %></td>-->
-        <td><%= link_to 'Show', order %>
+        <td> <%= link_to 'Show', order %>
           <% if @user.role == 'admin' %>
             <% if order.status == "not shipped" %>
-            | <%= link_to 'Ship Now', edit_order_path(order) %> |
+            | <%= link_to 'Ship Now', edit_order_path(order) %>
 
           <%= button_to 'Destroy', order, method: :delete, form:
             { data: { turbo: true, turbo_confirm: 'Are you sure?' } }, class: "btn-delete-index" %></td>

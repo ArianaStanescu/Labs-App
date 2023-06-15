@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Orders PDF</title>
+</head>
+<body>
+<h1>Orders PDF</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Product Name</th>
+    <th>Product Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.product.name %></td>
+      <td><%= order.product.price %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</body>
+</html>

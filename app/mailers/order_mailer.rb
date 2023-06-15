@@ -16,6 +16,17 @@ class OrderMailer < ApplicationMailer
       mail(to: order.user.email, subject: 'Order Shipped!')
     end
   end
+
+  # def generate_pdf_invoice_order(order)
+  #   pdf = WickedPdf.new.pdf_from_string(
+  #     render_to_string(
+  #       # template: Rails.root.join('order_mailer', 'invoice_pdf.html.erb').to_s
+  #       template: 'order_mailer/invoice_pdf'.to_s
+  #     )
+  #   )
+  #   pdf
+  # end
+
   private
 
   def generate_pdf_invoice

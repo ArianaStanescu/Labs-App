@@ -4,9 +4,9 @@ class AddressesController < ApplicationController
 
   # GET /addresses or /addresses.json
   def index
-    @addresses = Address.all
-  #   @user = current_user
-  #   @addresses = @user.addresses
+    # @addresses = Address.all
+    @user = current_user
+    @addresses = @user.addresses
   end
 
   # GET /addresses/1 or /addresses/1.json
