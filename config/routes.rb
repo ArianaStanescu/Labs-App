@@ -39,7 +39,11 @@ Rails.application.routes.draw do
   get 'generate_csv', to: 'orders#generate_csv', as: 'generate_csv'
   # get 'generate_pdf_invoice', to: 'orders#generate_pdf_invoice', as: 'generate_pdf_invoice'
   # get 'generate_pdf', to: 'orders#generate_pdf', as: 'generate_pdf'
+  # get 'generate_pdf_invoice/:id', to: 'orders#generate_pdf_invoice', as: 'generate_pdf_invoice'
+  #
+  get 'generate_invoice_pdf/:id', to: 'orders#generate_invoice_pdf', as: 'generate_invoice_pdf'
 
+  # get '/orders/:id/generate_pdf_invoice', to: 'orders#generate_pdf_invoice', as: 'generate_pdf_invoice'
 
-
+  # get 'invoice/:id', to: 'orders#invoice', as: 'invoice'
 end

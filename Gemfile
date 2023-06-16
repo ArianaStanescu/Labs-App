@@ -14,7 +14,7 @@ gem 'sweetalert2'
 gem "font-awesome-sass", "~> 6.4.0"
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-
+gem 'prawn-rails'
 
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"

@@ -3,8 +3,20 @@
 
   <%# @categories.each do |category| %>
   <h2 style="font-family: Lucida Handwriting; text-align: center"><%= @category.name %></h2>
-  <% category_product_count = @products.count { |product| product.category_id == @category.id } %>
-  <p style="font-family: Verdana; text-align: right;"> <%= category_product_count %> Results</p>
+
+
+  <%# category_product_count = @products.count { |product| product.category_id == @category.id } %>
+<!--  <p style="font-family: Verdana; text-align: right;"> <%#= category_product_count %> Results</p>-->
+  <br>
+  <div class="pagy-container">
+    <div class="pagy-info">
+      <%== pagy_info(@pagy) %>
+    </div>
+
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  </div>
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
       <% if (@category.id == product.category_id) %>
@@ -29,6 +41,9 @@
       <% end %>
     <% end %>
   <%# end %>
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
 
   </div>
   <br>

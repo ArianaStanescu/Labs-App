@@ -9,7 +9,7 @@ class OrderMailer < ApplicationMailer
     mail(to: user.email, subject: 'Order Placed!')
   end
 
-  def send_shipped_email(user, order)
+  def send_shipped_email(order)
     @product = order.product
     @order = order
     if order.status == 'shipped'
@@ -17,15 +17,6 @@ class OrderMailer < ApplicationMailer
     end
   end
 
-  # def generate_pdf_invoice_order(order)
-  #   pdf = WickedPdf.new.pdf_from_string(
-  #     render_to_string(
-  #       # template: Rails.root.join('order_mailer', 'invoice_pdf.html.erb').to_s
-  #       template: 'order_mailer/invoice_pdf'.to_s
-  #     )
-  #   )
-  #   pdf
-  # end
 
   private
 

@@ -6,11 +6,7 @@ class UsersController < ApplicationController
     users = User.all
     @pagy, @users = pagy(users)
   end
-  # def new
-  # end
-  # def user_params
-  #   params.require(:user).permit(:email, :password, :password_confirmation, credit_cards_attributes: [:number, :expiry_date])
-  # end
+
 
   def show
     @user = current_user

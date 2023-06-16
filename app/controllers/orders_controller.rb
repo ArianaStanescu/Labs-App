@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :check_admin, except: [:show, :create, :index]
+  before_action :check_admin, except: [:show, :create, :index, :generate_invoice_pdf]
   before_action :set_order, only: %i[ show edit update destroy ]
   include Pagy::Backend
   require 'securerandom'
@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @user = current_user
+
     orders = Order.includes(:product, :user).all
     unless current_user.admin?
       orders = orders.where(user_id: current_user.id)
@@ -18,11 +19,13 @@ class OrdersController < ApplicationController
     orders = orders.joins(:product).where(products: { metal: params[:metal] }) if params[:metal].present?
     orders = orders.joins(:product).where("products.name LIKE ?", "%#{params[:search]}%") if params[:search].present?
     orders = orders.where(status: params[:status]) if params[:status].present?
+
     if params[:sort_by] == 'asc'
       orders = orders.order(created_at: :asc)
     elsif params[:sort_by] == 'desc'
       orders = orders.order(created_at: :desc)
     end
+
     @pagy, @orders = pagy(orders)
 
   end
@@ -60,10 +63,21 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
 
-    if current_user.addresses.where(address_type: [Address.address_types[:shipping], Address.address_types[:both]]).empty? ||
-      current_user.addresses.where(address_type: [Address.address_types[:billing], Address.address_types[:both]]).empty?
-      redirect_to new_address_path, alert: "You need to add both a shipping address and a billing address before placing an order."
+    # if current_user.addresses.where(address_type: [Address.address_types[:shipping], Address.address_types[:both]]).empty? ||
+    #   current_user.addresses.where(address_type: [Address.address_types[:billing], Address.address_types[:both]]).empty?
+    #   redirect_to new_address_path, alert: "You need to add both a shipping address and a billing address before placing an order."
+    #   return
+    # end
+
+    if current_user.addresses.where(address_type: [Address.address_types[:shipping], Address.address_types[:both]]).empty?
+      redirect_to new_address_path, alert: "You need to add a shipping address before placing an order."
       return
+    elsif current_user.addresses.where(address_type: [Address.address_types[:billing], Address.address_types[:both]]).empty?
+      redirect_to new_address_path, alert: "You need to add a billing address before placing an order."
+      return
+    elsif  current_user.addresses.where(address_type: [Address.address_types[:both]]).empty?
+      redirect_to new_address_path, alert: "You need to add both a shipping address and a billing address before placing an order."
+        return
     end
 
     if current_user.credit_cards.empty?
@@ -99,7 +113,8 @@ class OrdersController < ApplicationController
       #   format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
       #   format.json { render :show, status: :ok, location: @order } order_params.present? &&
       if  @order.update(tracking_number:  generate_tracking_number, status: :shipped)
-        OrderMailer.send_shipped_email(current_user, @order).deliver_now
+        # OrderMailer.send_shipped_email(current_user, @order).deliver_now
+        OrderMailer.send_shipped_email(@order).deliver_now
         # @order.tracking_number = generate_tracking_number
               format.html { redirect_to order_url(@order), notice: "Order was successfully shipped." }
               format.json { render :show, status: :ok, location: @order }
@@ -123,6 +138,33 @@ class OrdersController < ApplicationController
     end
   end
 
+  def generate_invoice_pdf
+    @order = Order.find(params[:id])
+    pdf = Prawn::Document.new(page_size: 'A4')
+    pdf.text "Order Invoice", align: :center, size: 18, style: :bold
+    pdf.move_down 20
+    pdf.text "Order Details:", style: :bold
+    pdf.text "Product Name: #{@order.product.name}"
+    pdf.text "Quantity: #{@order.quantity}"
+    pdf.move_down 10
+    pdf.text "Order Price: $#{@order.product.price}"
+
+    pdf.move_down 20
+    pdf.text "Customer Details:", style: :bold
+    pdf.text "Name: #{@order.user.name}"
+    pdf.text "Email: #{@order.user.email}"
+
+    # if @order.product.image.attached?
+    #   # image_path = Rails.application.routes.url_helpers.rails_blob_path(@order.product.image, only_path: true)
+    #   image_path = url_for(@order.product.image)
+    #   pdf.move_down 10
+    #   pdf.image image_path, width: 200, position: :center
+    # end
+
+    send_data pdf.render, filename: "invoice_#{@order.id}.pdf", type: 'application/pdf', disposition: 'inline'
+
+  end
+
   def generate_csv
     @orders = Order.all
     csv_data = CSV.generate do |csv|
@@ -133,32 +175,6 @@ class OrdersController < ApplicationController
     end
     send_data csv_data, filename: "orders.csv"
   end
-
-  # def generate_pdf_invoice
-  #   @user = current_user
-  #   @order = Order.find(params[:id])
-  #   @product = @order.product
-  #   pdf = WickedPdf.new.pdf_from_string(
-  #     render_to_string(
-  #       # template: Rails.root.join('order_mailer', 'invoice_pdf.html.erb').to_s
-  #       template: 'order_mailer/invoice_pdf'.to_s
-  #     )
-  #   )
-  #   # pdf
-  #   send_data pdf, filename: 'invoice.pdf', type: 'application/pdf', disposition: 'inline'
-  # end
-
-  # def generate_pdf
-  #   @user = current_user
-  #   @order = Order.find(params[:id])
-  #
-  #   respond_to do |format|
-  #     format.pdf do
-  #       pdf = WickedPdf.new.pdf_from_string(render_to_string(template: 'orders/generate_pdf'))
-  #       send_data pdf, filename: "orders.pdf", type: "application/pdf", disposition: "inline"
-  #     end
-  #   end
-  # end
 
 
   private

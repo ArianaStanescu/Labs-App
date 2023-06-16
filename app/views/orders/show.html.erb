@@ -74,9 +74,11 @@
 <div style="text-align: center;">
   <% if @user.role == 'client' %>
     <%= link_to "Back to products", all_products_path, class: "btn btn-primary" %>
-    <%#= link_to "Invoice", generate_pdf_path, class: "btn btn-primary" %>
+    <%= link_to "Invoice", generate_invoice_pdf_path(@order.id, format: :pdf), class: "btn btn-primary" %>
+    <%#= link_to "Invoice2", invoice_path, class: "btn btn-primary" %>
   <% else %>
     <%= link_to "Back to orders", orders_path, class: "btn btn-primary" %>
+    <%= link_to "Invoice", generate_invoice_pdf_path(@order.id, format: :pdf), class: "btn btn-primary" %>
   <% end %>
 </div>
 <br>
