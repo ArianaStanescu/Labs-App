@@ -67,6 +67,7 @@
                 <br>
                 <%#= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: {method: :post}, class: "btn btn-primary" %>
                 <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: product.id }), data: { turbo: true, turbo_confirm: 'Are you sure?' }, method: :post, class: "btn btn-primary" %>
+
               <% elsif product.stock == 0%>
                   <p class="text-muted mb-0" style="color:#ff66cc"> This item is out of stock!</p>
                 <% else %>
@@ -113,15 +114,6 @@
 <% end %>
 
 
-<!--<script>-->
-<!--    const sortSelect = document.getElementById('sort-select');-->
-<!--    sortSelect.addEventListener('change', () => {-->
-<!--        const selectedValue = sortSelect.value;-->
-<!--        const currentUrl = new URL(window.location.href);-->
-<!--        currentUrl.searchParams.set('sort_order', selectedValue);-->
-<!--        window.location.href = currentUrl.href;-->
-<!--    });-->
-<!--</script>-->
 
 
 

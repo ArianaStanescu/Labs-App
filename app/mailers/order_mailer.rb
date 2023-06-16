@@ -9,13 +9,15 @@ class OrderMailer < ApplicationMailer
     mail(to: user.email, subject: 'Order Placed!')
   end
 
-  def send_shipped_email(user, order)
+  def send_shipped_email(order)
     @product = order.product
     @order = order
     if order.status == 'shipped'
       mail(to: order.user.email, subject: 'Order Shipped!')
     end
   end
+
+
   private
 
   def generate_pdf_invoice

@@ -1,13 +1,4 @@
-<!--<p style="color: green"><%#= notice %></p>-->
 
-<%#= render @order %>
-
-<!--<div>-->
-<!--  <%#= link_to "Edit this order", edit_order_path(@order) %> |-->
-  <%#= link_to "Back to orders", orders_path %>
-
-  <%#= button_to "Destroy this order", @order, method: :delete %>
-<!--</div>-->
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-lg-4 mx-auto" style="margin-left: 400px">
@@ -83,8 +74,11 @@
 <div style="text-align: center;">
   <% if @user.role == 'client' %>
     <%= link_to "Back to products", all_products_path, class: "btn btn-primary" %>
+    <%= link_to "Invoice", generate_invoice_pdf_path(@order.id, format: :pdf), class: "btn btn-primary" %>
+    <%#= link_to "Invoice2", invoice_path, class: "btn btn-primary" %>
   <% else %>
     <%= link_to "Back to orders", orders_path, class: "btn btn-primary" %>
+    <%= link_to "Invoice", generate_invoice_pdf_path(@order.id, format: :pdf), class: "btn btn-primary" %>
   <% end %>
 </div>
 <br>

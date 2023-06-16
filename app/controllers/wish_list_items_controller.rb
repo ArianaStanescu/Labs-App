@@ -4,22 +4,32 @@ class WishListItemsController < ApplicationController
 
   # GET /wish_list_items or /wish_list_items.json
   def index
-    # @wish_list_items = WishListItem.all
     wish_list_items = WishListItem.includes(:product, :user).all
     @wish_list_items = wish_list_items.where(user_id: current_user.id)
   end
 
   # GET /wish_list_items/1 or /wish_list_items/1.json
   def show
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized.'
+    end
   end
 
   # GET /wish_list_items/new
   def new
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized.'
+    end
+    redirect_to root_path, alert: 'You are not authorized.'
     @wish_list_item = WishListItem.new
   end
 
   # GET /wish_list_items/1/edit
   def edit
+    # unless current_user.admin?
+    #   redirect_to root_path, alert: 'You are not authorized.'
+    # end
+    redirect_to root_path, alert: 'You are not authorized.'
   end
 
   # POST /wish_list_items or /wish_list_items.json
@@ -40,6 +50,9 @@ class WishListItemsController < ApplicationController
 
   # PATCH/PUT /wish_list_items/1 or /wish_list_items/1.json
   def update
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized.'
+    end
     respond_to do |format|
       if @wish_list_item.update(wish_list_item_params)
         format.html { redirect_to wish_list_item_url(@wish_list_item), notice: "Wish list item was successfully updated." }
@@ -64,7 +77,13 @@ class WishListItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wish_list_item
-      @wish_list_item = WishListItem.find(params[:id])
+      @wish_list_item = WishListItem.find_by(params[:id])
+      # @wish_list_item = WishListItem.find(params[:id])
+
+      if @wish_list_item.nil?
+        flash[:alert] = "Wish List Item not found"
+        redirect_to root_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

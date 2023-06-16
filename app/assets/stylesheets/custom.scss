@@ -27,14 +27,16 @@
 .btn-delete {
   font-size: 12px;
   padding: 5px 10px;
-  background-color: #ff8080;
+  //background-color: #ff8080;
+  background-color: #ff9999;
   color:white;
   border-color: #ff4d4d;
 }
 
 .btn-delete:hover {
   font-size: 12px;
-  background-color: #ff6666;
+  //background-color: #ff6666;
+  background-color: #ff8080;
   color:white;
   border-color: #ff4d4d;
 }
@@ -42,12 +44,13 @@
 .btn-delete-index {
   background-color: #ffcccc;
   color:black;
-  border-color: #ff9999;
+  border:none;
+  //border-color: #ff9999;
 }
 
 .btn-delete-index:hover {
   background-color: #ffb3b3;
-  border-color: #ff9999;
+  //border-color: #ff9999;
 }
 
 a.text-success {

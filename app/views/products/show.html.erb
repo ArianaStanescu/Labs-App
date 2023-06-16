@@ -4,7 +4,7 @@
       margin-left: 100px; margin-right: 100px">
       <div class="col-md-6 col-lg-6 col-xl-5">
         <%#= image_tag @product.product_image + ".jpg" %>
-        <%= image_tag @product.image %>
+        <%= image_tag @product.image , style:"margin:20px" %>
       </div>
       <div class="col-md-4 col-lg-4 col-xl-2 offset-xl-1" >
         <br><br>
@@ -18,8 +18,12 @@
           <p class="card-text">Price: <%= @product.price %>$ | Stock: <%= @product.stock %></p>
           <p class="text-muted mb-0">Added by <%= @wish_list_item_count %> users in wish list</p>
 
+          <% unless current_user.present? %>
+            <p class="text-muted mb-0" style="color:#82adff"> You need to be logged in to order!</p>
+          <%end %>
+
           <% if current_user.present? && current_user.role == "admin" && @product.stock > 0 %>
-            <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: @product.id }), data: {method: :post}, class: "btn btn-primary" %>
+            <%= button_to 'Buy Now!', orders_path(order: { user_id: current_user.id, product_id: @product.id }), data: { turbo: true, turbo_confirm: 'Are you sure?' }, method: :post, class: "btn btn-primary" %>
           <%end %>
           <br>
           <% if current_user.present?  && current_user.role == "admin" %>
@@ -32,7 +36,7 @@
           <br><br>
           <% if current_user.present? && @wish_list_items.any? { |wish_list_item| wish_list_item.product_id == @product.id }%>
               <p class="text-muted mb-0" style="color:#82adff">This item is already in the wish list!</p>
-            <% elsif @product.stock > 0 %>
+            <% elsif @product.stock  > 0  && current_user.present?%>
               <%= button_to wish_list_items_path(wish_list_item: { user_id: current_user.id, product_id: @product.id }), method: :post, class: "btn btn-primary-2" do %>
               <i class="fa fa-heart" aria-hidden="true"></i>
             <% end %>
@@ -47,12 +51,9 @@
           <% if current_user.present? && current_user.role == "client" %>
             <%= link_to 'Back', all_products_path, class: "btn btn-primary" %>
           <%end %>
-
-          <% unless current_user.present? %>
-            <p class="text-muted mb-0" style="color:#82adff"> You need to be logged in to order!</p>
-          <%end %>
-          
           <br><br>
+          
+
 
         </div>
       </div>

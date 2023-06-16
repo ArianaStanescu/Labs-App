@@ -1,18 +1,18 @@
 <%= form_tag orders_path, method: :get, class: 'form-inline', id: 'orders-form' do %>
   <%= label_tag :category_id, 'Category:' %>
-  <%= select_tag :category_id, options_for_select(Category.all.pluck(:name, :id), params[:category_id]), prompt: 'All'%>
+  <%= select_tag :category_id, options_for_select(Category.all.pluck(:name, :id), params[:category_id]), prompt: 'All',  class: "form-control"%>
 
   <%= label_tag :metal, 'Metal:' %>
-  <%= select_tag :metal, options_for_select(Product.distinct.pluck(:metal).sort, params[:metal]), prompt: 'All'%>
+  <%= select_tag :metal, options_for_select(Product.distinct.pluck(:metal).sort, params[:metal]), prompt: 'All',  class: "form-control"%>
 
   <%= label_tag :status, 'Status:' %>
-  <%= select_tag :status, options_for_select(Order.distinct.pluck(:status).sort, params[:status]), prompt: 'All' %>
+  <%= select_tag :status, options_for_select(Order.distinct.pluck(:status).sort, params[:status]), prompt: 'All',  class: "form-control" %>
 
   <%= label_tag :sort_by, 'Sort by date:' %>
-  <%= select_tag :sort_by, options_for_select({ 'Newest' => 'desc', 'Oldest' => 'asc'}, params[:sort_by]), prompt: 'None' %>
+  <%= select_tag :sort_by, options_for_select({ 'Newest' => 'desc', 'Oldest' => 'asc'}, params[:sort_by]), prompt: 'None',  class: "form-control" %>
 
   <%#= text_field_tag(:search, params[:search]) %>
-  <%= text_field_tag :search, params[:search], placeholder: 'Search item', style:"width:120px" %>
+  <%= text_field_tag :search, params[:search], placeholder: 'Search item', style:"width:120px",  class: "form-control" %>
   <%= submit_tag 'Filter', class: 'btn btn-primary mb-2' %>
 
 <% end %>

@@ -4,9 +4,8 @@ class AddressesController < ApplicationController
 
   # GET /addresses or /addresses.json
   def index
-    @addresses = Address.all
-  #   @user = current_user
-  #   @addresses = @user.addresses
+    @user = current_user
+    @addresses = @user.addresses
   end
 
   # GET /addresses/1 or /addresses/1.json
@@ -22,6 +21,10 @@ class AddressesController < ApplicationController
 
   # GET /addresses/1/edit
   def edit
+    @address = CreditCard.find(params[:id])
+    if @address.user_id != current_user.id
+      redirect_to root_path, alert: "You are not authorized to edit this address."
+    end
   end
 
   # POST /addresses or /addresses.json

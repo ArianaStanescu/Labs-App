@@ -1,31 +1,22 @@
-<!--<div class="card" style="width: 18rem;">-->
-  <%#= image_tag "ring_1.jpg", class: "d-block w-100" %>
-<!--  <div class="card-body">-->
-<!--    <h5 class="card-title"><%#= @category.name %></h5>-->
-<!--    <p class="card-text"><%#= @category.description %></p>-->
-    <%#= link_to 'Edit', edit_category_path(@category), class: "btn btn-primary" %>
-    <%#= link_to 'Back', categories_path, class: "btn btn-primary" %>
-<!--  </div>-->
-<!--</div>-->
-
-
-<!--  <div class="image-list-home">-->
-<!--    <ul>-->
-<!--      <li id="home-list1">-->
-        <%#= image_tag "ring_1.jpg", style: "width: 20rem;", class: "custom" %>
-<!--      </li>-->
-<!--      <li id="home-list1">-->
-        <%#= image_tag "ring_2.jpg", style: "width: 20rem;" %>
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </div>-->
 
 <div class="container">
 
   <%# @categories.each do |category| %>
   <h2 style="font-family: Lucida Handwriting; text-align: center"><%= @category.name %></h2>
-  <% category_product_count = @products.count { |product| product.category_id == @category.id } %>
-  <p style="font-family: Verdana; text-align: right;"> <%= category_product_count %> Results</p>
+
+
+  <%# category_product_count = @products.count { |product| product.category_id == @category.id } %>
+<!--  <p style="font-family: Verdana; text-align: right;"> <%#= category_product_count %> Results</p>-->
+  <br>
+  <div class="pagy-container">
+    <div class="pagy-info">
+      <%== pagy_info(@pagy) %>
+    </div>
+
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
+  </div>
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
     <% @products.each do |product| %>
       <% if (@category.id == product.category_id) %>
@@ -50,6 +41,9 @@
       <% end %>
     <% end %>
   <%# end %>
+    <div class="pagy-nav">
+      <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+    </div>
 
   </div>
   <br>
@@ -59,17 +53,3 @@
 </div>
 
 <br>
-
-
-
-
-<!--<p style="color: green"><%#= notice %></p>-->
-
-<%#= render @category %>
-
-<!--<div>-->
-<!--  <%#= link_to "Edit this category", edit_category_path(@category) %> |-->
-  <%#= link_to "Back to categories", categories_path %>
-
-  <%#= button_to "Destroy this category", @category, method: :delete %>
-<!--</div>-->

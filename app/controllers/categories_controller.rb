@@ -2,22 +2,20 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :check_admin
   # before_action :set_product, only: %i[ show edit update destroy ]
+  include Pagy::Backend
+
+
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    categories = Category.all
+    @pagy, @categories= pagy(categories)
   end
 
   # GET /categories/1 or /categories/1.json
   def show
-    # initial asa era si mergea
-    # @products = @category.products
-
-
-    # @products = Product.all
-    # @categories = Category.all
-
     @category = Category.find(params[:id])
-    @products = @category.products
+    products = @category.products
+    @pagy, @products = pagy(products)
   end
 
   # GET /categories/new
