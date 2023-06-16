@@ -25,16 +25,6 @@ class OrdersController < ApplicationController
     end
     @pagy, @orders = pagy(orders)
 
-
-
-    # @orders = Order.includes(:product, :user).all
-    # @user = current_user
-    # if @user.role == "client"
-    #   @orders = @user.orders
-    # else
-    #   @orders = Order.includes(:product, :user).all
-    # end
-    # @pagy, @orders = pagy(@orders)
   end
 
   # GET /orders/1 or /orders/1.json
@@ -69,6 +59,18 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
+
+    if current_user.addresses.where(address_type: [Address.address_types[:shipping], Address.address_types[:both]]).empty? ||
+      current_user.addresses.where(address_type: [Address.address_types[:billing], Address.address_types[:both]]).empty?
+      redirect_to new_address_path, alert: "You need to add both a shipping address and a billing address before placing an order."
+      return
+    end
+
+    if current_user.credit_cards.empty?
+      redirect_to new_credit_card_path, alert: "You need to add a credit card before placing an order."
+      return
+    end
+
     respond_to do |format|
       if @order.save
         wish_list_item = current_user.wish_list_items.find_by(product_id: params[:order][:product_id])

@@ -11,15 +11,24 @@ class WishListItemsController < ApplicationController
 
   # GET /wish_list_items/1 or /wish_list_items/1.json
   def show
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized.'
+    end
   end
 
   # GET /wish_list_items/new
   def new
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized.'
+    end
     @wish_list_item = WishListItem.new
   end
 
   # GET /wish_list_items/1/edit
   def edit
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized.'
+    end
   end
 
   # POST /wish_list_items or /wish_list_items.json
@@ -40,6 +49,9 @@ class WishListItemsController < ApplicationController
 
   # PATCH/PUT /wish_list_items/1 or /wish_list_items/1.json
   def update
+    unless current_user.admin?
+      redirect_to root_path, alert: 'You are not authorized.'
+    end
     respond_to do |format|
       if @wish_list_item.update(wish_list_item_params)
         format.html { redirect_to wish_list_item_url(@wish_list_item), notice: "Wish list item was successfully updated." }

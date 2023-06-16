@@ -1,23 +1,9 @@
-<!--<p style="color: green"><%#= notice %></p>-->
-
-<!--<h1>Wish list items</h1>-->
-
-<!--<div id="wish_list_items">-->
-  <%# @wish_list_items.each do |wish_list_item| %>
-    <%#= render wish_list_item %>
-<!--    <p>-->
-      <%#= link_to "Show this wish list item", wish_list_item %>
-<!--    </p>-->
-  <%# end %>
-<!--</div>-->
-
-<%#= link_to "New wish list item", new_wish_list_item_path %>
 
 <div class="container mt-5" style="font-family: Verdana">
   <h2 style="font-family: Lucida Handwriting; text-align: center">Wish List</h2>
 
-  <%# product_count = @products.count %>
-  <!--  <p style="font-family: Verdana; "> <%#= product_count %> Products</p>-->
+  <% wish_list_items_count = @wish_list_items.count %>
+    <p style="font-family: Verdana; "> <%= wish_list_items_count %> Products</p>
 
   <div class="card-deck" style="display: flex; flex-wrap: wrap; justify-content: center;">
   <% @wish_list_items.each do |wish_list_item| %>

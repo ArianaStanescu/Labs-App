@@ -2,8 +2,6 @@
   <h2 style="font-family: Lucida Handwriting; text-align: center">Products</h2>
   <%= link_to 'New product', new_product_path, style:"font-size: large" %>
   <br><br>
-  <%# product_count = @products.count %>
-<!--  <p style="font-family: Verdana; "> <%#= product_count %> Products</p>-->
 
   <%= render "filter_menu" %>
 
@@ -34,7 +32,7 @@
     </tr>
     </thead>
     <tbody>
-    <%# @products.each do |product| %>
+
     <% @products.each.with_index(1) do |product, index| %>
       <tr>
         <td><%= index %></td>
@@ -56,10 +54,7 @@
 
     </tbody>
   </table>
-<!--  <div class="text-right">-->
-    <%#= will_paginate @products, previous_label: '← Previous', next_label: 'Next →', class: 'pagination justify-content-end' %>
 
-<!--  </div>-->
   <div class="pagy-container">
     <div class="pagy-info">
     </div>
@@ -72,21 +67,3 @@
 </div>
 
 
-
-
-
-
-<!--<p style="color: green"><%#= notice %></p>-->
-
-<!--<h1>Products</h1>-->
-
-<!--<div id="products">-->
-  <%# @products.each do |product| %>
-    <%#= render product %>
-<!--    <p>-->
-      <%#= link_to "Show this product", product %>
-<!--    </p>-->
-  <%# end %>
-<!--</div>-->
-
-<%#= link_to "New product", new_product_path %>
